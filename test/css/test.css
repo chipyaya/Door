@@ -1,0 +1,28 @@
+body{
+	background-image: url("../img/bg.png");
+}
+
+.content{
+	padding: 10px 10px 0 10px;
+	margin: auto;
+	width: 80%;
+}
+
+.blackBlock{
+	background-color: black;
+	opacity: 0.8;
+	margin: 0 auto;
+	height: 750px;
+}
+
+h1.question{
+	color: white;
+	font-family: Consolas, monaco, monospace;
+	padding: 50px 80px;
+}
+
+h1.choice{
+	color: white;
+	font-family: Consolas, monaco, monospace;
+	padding: 10px 80px;
+}

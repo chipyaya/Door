@@ -33,7 +33,7 @@ $(document).ready(function(){
       delayScale: 1.5,
 
       // set the delay between each character
-      delay: 50,
+      delay: 80,
 
       // set to true to animate all the characters at the same time
       sync: false,

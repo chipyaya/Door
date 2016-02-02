@@ -1,5 +1,5 @@
 {
-  "name": "lie detector",
+  "name": "lie_detector",
   "version": "0.0.0",
   "private": true,
   "main": "app.js",

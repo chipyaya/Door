@@ -1,0 +1,10 @@
+extends layout
+
+block content
+	.content
+		.blackBlock
+			img.terminal_bar(src='/img/terminal_bar.png')
+			.ques_choice
+				h1.tlt_q.question #{Q.title}
+				a(href="#{parseInt(Q.qnum)+1}")#A.tlt_c1.button_c #{Q.ansA}
+				a(href="#{parseInt(Q.qnum)+1}")#B.tlt_c2.button_c #{Q.ansB}

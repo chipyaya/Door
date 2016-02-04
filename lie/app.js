@@ -34,6 +34,10 @@ app.get('/Q/:qnum', function(req, res){
 	res.render('questions',{Q:questions[parseInt(req.params.qnum)-1]});
 })
 
+app.get('/share', function(req, res){
+	res.render('sharephoto');
+})
+
 app.post('/A', function(req, res){
 	console.log('req.body.ans',req.body.ans);
 })

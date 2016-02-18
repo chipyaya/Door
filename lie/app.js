@@ -28,10 +28,6 @@ app.get('/', function(req, res){
 	res.render('index');
 })
 
-app.get('/sharephoto', function(req, res){
-	res.render('sharephoto');
-})
-
 app.get('/Q/:qnum', function(req, res){
 	if(req.params.qnum > questions.length)
 		res.end();

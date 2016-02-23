@@ -2,6 +2,10 @@ body{
 	background-image: url("../img/bg.png");
 }
 
+#center{
+	text-align: center;
+}
+
 .content{
 	padding: 10px 10px 0 10px;
 	margin: auto;

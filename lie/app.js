@@ -39,7 +39,7 @@ app.get('/result', function(req, res){
 
 app.get('/Q/:qnum', function(req, res){
 
-	fs.readFile('readfiletest.txt', 'utf8', function(err,data){
+	fs.readFile('pulse.txt', 'utf8', function(err,data){
 		if (err) throw err;
 		var d = new Date();
 		time.push(d.getTime());

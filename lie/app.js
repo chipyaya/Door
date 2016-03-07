@@ -4,6 +4,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var fs = require("fs");
 
 //var routes = require('./routes/index');
 //var users = require('./routes/users');
@@ -20,17 +21,32 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 var questions=[
-	{qnum:1, title:"Q1：你單身嗎?", ansA: "當然~我可是正港的魯蛇耶", ansB: "不是~我走魯門只是想體驗當魯蛇的感覺"},
-	{qnum:2, title:"Q2：XXXXX", ansA: "OOOOOOO", ansB: "XXXXXXXX"}
+	{qnum:1, title:"Q1：你單身嗎你單身嗎你單身嗎你單身嗎你單身嗎你單身嗎你單身嗎你單身嗎你單身嗎你單身嗎你單身嗎?", ansA: "當然~我可是正港的魯蛇耶", ansB: "不是~我走魯門只是想體驗當魯蛇的感覺", next:"/Q/2"},
+	{qnum:2, title:"Q2：XXXXX", ansA: "OOOOOOO", ansB: "XXXXXXXX", next:"/result"}
 ];
+
 
 app.get('/', function(req, res){
 	res.render('index');
 })
+var time=[];
+var pulse=[];
+var averagePulsePerQ=[];
+
+app.get('/result', function(req, res){
+	res.render('result');
+});
 
 app.get('/Q/:qnum', function(req, res){
-	if(req.params.qnum > questions.length)
-		res.end();
+
+	fs.readFile('readfiletest.txt', 'utf8', function(err,data){
+		if (err) throw err;
+		var d = new Date();
+		time.push(d.getTime());
+		pulse.push(parseInt(data));
+		console.log('time',time,'pulse',pulse);
+	});
+
 	res.render('questions',{Q:questions[parseInt(req.params.qnum)-1]});
 })
 

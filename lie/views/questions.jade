@@ -6,8 +6,8 @@ block content
 			img.terminal_bar(src='/img/terminal_bar.png')
 			.ques_choice
 				h1.tlt_q.question #{Q.title}
-				a(href="#{parseInt(Q.qnum)+1}")#A.tlt_c1.button_c &#9758; #{Q.ansA}
-				a(href="#{parseInt(Q.qnum)+1}")#B.tlt_c2.button_c &#9758; #{Q.ansB}
+				a(href="#{Q.next}")#A.tlt_c1.button_c &#9758; #{Q.ansA}
+				a(href="#{Q.next}")#B.tlt_c2.button_c &#9758; #{Q.ansB}
 	script(src='/js/jquery.lettering.js')
 	script(src='/js/jquery.fittext.js')
 	script(src='/js/jquery.textillate.js')

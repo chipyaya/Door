@@ -5,9 +5,11 @@ block content
 		.blackBlock
 			img.terminal_bar(src='/img/terminal_bar.png')
 			.ques_choice
-				h1.tlt_q.question #{Q.title}
-				a(href="#{Q.next}")#A.tlt_c1.button_c &#9758; #{Q.ansA}
-				a(href="#{Q.next}")#B.tlt_c2.button_c &#9758; #{Q.ansB}
+				h1.tlt_q.question Q#{Q.qnum} #{Q.title}
+				a(href="#{Q.Anext}")#A.tlt_c1.button_c &#9758; #{Q.ansA}
+				a(href="#{Q.Bnext}")#B.tlt_c2.button_c &#9758; #{Q.ansB}
+				if (typeof(Q.ansC) !== 'undefined')
+					a(href="#{Q.Cnext}")#C.tlt_c2.button_c &#9758; #{Q.ansC}
 	script(src='/js/jquery.lettering.js')
 	script(src='/js/jquery.fittext.js')
 	script(src='/js/jquery.textillate.js')

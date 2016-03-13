@@ -1,0 +1,5 @@
+extends layout
+
+block content
+	script(src='/js/sharephoto.js')
+	fb:login-button(scope='public_profile' onlogin="checkLoginState()")

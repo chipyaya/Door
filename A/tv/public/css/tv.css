@@ -1,0 +1,82 @@
+div{
+	height: 100vh;
+}
+
+p { 
+	margin:0px;
+}
+
+.all{
+	border-style: solid;
+	border-width: thin;
+}
+
+#div1{
+	width: 25%;
+	float: left;
+}
+
+#div2{
+	width: 75%;
+	float: left;
+}
+
+#div1, #div2 {
+	box-sizing: border-box;   
+}
+
+.small{
+	height: 24.4%;
+	margin: 6px;
+	color: white;
+}
+
+.left{
+	text-indent: 35px;
+	font-size: 90px;
+	text-align: left;
+}
+.mid{
+	font-size: 80px;
+	text-align: center;
+}
+.midtime{
+	font-size: 50px;
+	text-align: center;
+}
+.midcode{
+	font-size: 50px;
+	text-align: center;
+}
+#winner{
+	background-color:orange;
+}
+#loser{
+	background-color:blue;
+}
+#time{
+	background-color:green;
+	padding: 25px;
+}
+#QRcode{
+	padding: 25px;
+	background-color:red;
+}
+
+.main{
+	background-color: black;
+	height: 87%;
+	margin: 6px;
+}
+
+.marquee{
+	background-color: blue;
+	height: 11%;
+	margin: 6px;
+}
+img.display{
+	width: 200px;
+	display: block;
+	margin-left: auto;
+	margin-right: auto
+}

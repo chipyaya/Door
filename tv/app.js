@@ -24,8 +24,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 var astros = [];
 var daily_astro;
 
-for(var i = 0; i<12; i++)
+for(var i = 0; i<12; i++){
   astros.push(i);
+}
 
 function changeMarquee(){
   console.log(daily_astro);
@@ -35,11 +36,11 @@ function get_astro_daily(){
   var date = new Date();
   var month = date.getMonth();
   var day = date.getDate();
+  var count = 0;
   daily_astro="";
   
   astros.forEach(function(index,item){
-
-    var astro_url = "http://astro.click108.com.tw/daily_"+item+".php?iAcDay=2016-0"+day+"-"+month+1+"&iAstro="+item;
+	var astro_url = "http://astro.click108.com.tw/daily_"+item+".php?iAcDay=2016-0"+(month+1)+"-"+day+"&iAstro="+item;
     
     request({
       url: astro_url,
@@ -50,12 +51,12 @@ function get_astro_daily(){
 
       var astro = $(".TODAY_CONTENT h3").text();
       var content = $(".TODAY_CONTENT p:nth-child(3)").text();
+	  count++;
 
-      daily_astro+=astro+"-"+content+"     ";
+      daily_astro+=item+astro+"-"+content+"\n";
       
-      if(index == astros.length-1)
+      if(count == astros.length)  
         changeMarquee();
-        
     });
     
   });

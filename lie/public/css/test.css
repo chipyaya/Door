@@ -87,3 +87,19 @@ h1.question{
     border: 2px solid #ffffff;
 }
 
+#success_notice{
+	display:none;
+	background:black;
+	position:absolute;
+	height:100px;
+	width:200px;
+	top:200px;
+}
+#success_notice span{
+	color:white;
+}
+
+#share{
+	margin:0 auto;
+}
+

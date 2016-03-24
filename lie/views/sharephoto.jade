@@ -3,7 +3,11 @@ extends layout
 block content
 	script(src='/js/sharephoto.js')
 	//-fb:login-button(scope='public_profile' onlogin="checkLoginState()")
-	a(href="#" onclick="checkLoginState()") 登入並上傳照片至Facebook
-	#success_notice
-		span 上傳成功! 快去Facebook看看吧!
-		button.btn.btn-default(onclick="logout()") 確定
+	h1.text-center 魯門的世界
+	#intro.col-md-6.col-md-offset-3
+		#center
+			a(href="#" onclick="checkLoginState()").button_start 登入並上傳照片至Facebook
+			#success_notice
+				span 上傳成功! 快去Facebook看看吧!
+				br
+				.button_start(onclick="logout()") 確定

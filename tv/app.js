@@ -23,51 +23,65 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 var astros = [];
 var daily_astro;
+var time = [];
 
 for(var i = 0; i<12; i++){
-  astros.push(i);
+	astros.push(i);
 }
 
+/*
 function changeMarquee(){
-  console.log(daily_astro);
+	console.log(daily_astro);
+}
+*/
+
+function getTime(){
+	var D = new Date();
+	time.push(D.getFullYear()+"."+(D.getMonth()+1)+"."+D.getDate());
+	time.push(D.getHours()+":"+D.getMinutes());
+
+	var dayList = ["Sun.", "Mon.", "Tue.", "Wed.", "Thu.", "Fri.", "Sat."];
+	time.push(dayList[D.getDay()]);
+	//console.log(time);
 }
 
 function get_astro_daily(){
-  var date = new Date();
-  var month = date.getMonth();
-  var day = date.getDate();
-  var count = 0;
-  daily_astro="";
-  
-  astros.forEach(function(index,item){
+	var date = new Date();
+	var month = date.getMonth();
+	var day = date.getDate();
+	var count = 0;
+	daily_astro="";
+
+	astros.forEach(function(index,item){
 	var astro_url = "http://astro.click108.com.tw/daily_"+item+".php?iAcDay=2016-0"+(month+1)+"-"+day+"&iAstro="+item;
     
-    request({
-      url: astro_url,
-      method: "GET"
-    }, function(e,r,b) {
+		request({
+			url: astro_url,
+			method: "GET"
+		}, function(e,r,b) {
 
-      $ = cheerio.load(b);
+			$ = cheerio.load(b);
 
-      var astro = $(".TODAY_CONTENT h3").text();
-      var content = $(".TODAY_CONTENT p:nth-child(3)").text();
-	  count++;
+			var astro = $(".TODAY_CONTENT h3").text();
+			var content = $(".TODAY_CONTENT p:nth-child(3)").text();
+			count++;
 
-      daily_astro+=item+astro+"-"+content+"\n";
-      
-      if(count == astros.length)  
-        changeMarquee();
-    });
+			daily_astro+=astro+" - "+content+"________ ";
+			
+			//if(count == astros.length)  
+				//changeMarquee();
+		});
     
-  });
+	});
 }
 
+getTime();
 get_astro_daily();
 
 app.get('/', function(req, res){
-  res.render('index');
+	res.render('index', {M:daily_astro, T:time});
 })
 
 app.listen(3001, function () {
-  console.log('Example app listening on port 3001!');
+	console.log('Example app listening on port 3001!');
 });

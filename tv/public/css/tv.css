@@ -45,7 +45,7 @@ p {
 	text-align: center;
 }
 .midcode{
-	font-size: 50px;
+	font-size: 40px;
 	text-align: center;
 }
 #winner{
@@ -69,14 +69,23 @@ p {
 	margin: 6px;
 }
 
-.marquee{
+.marq{
 	background-color: blue;
 	height: 11%;
 	margin: 6px;
+	color: white;
+	text-align: center;
 }
+
+.marqtext{
+	white-space: nowrap;
+	font-size: 50px;
+}
+
 img.display{
-	width: 200px;
+	width: 160px;
 	display: block;
 	margin-left: auto;
 	margin-right: auto
 }
+

@@ -10,15 +10,17 @@ block content
 				p.left 魯蛇: 
 				p.mid 70% 
 			.small#time	   
-				p.midtime  2016.05.02
-				p.midtime  00:00
-				p.midtime  Mon.
+				p.midtime  #{T[0]}
+				p.midtime  #{T[1]}
+				p.midtime  #{T[2]}
 			.small#QRcode  
 				img.display(src='img/qr_code.jpg') 
 				p.midcode  NTUAF
 		#div2
 			.main 
-			.marquee 
+			.marq 
+				marquee(scrollamount="20")
+					p.marqtext #{M}
 
 
 

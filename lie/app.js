@@ -20,10 +20,11 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// About the content of all questions and the next question number(or result page)
 var questions=[
 	{qnum:1, title:"你單身嗎", ansA: "是", ansB: "否", Anext:"/Q/2", Bnext:"/Q/2"},
-	{qnum:2, title:"你有約會過嗎/有異性（喜歡的那個性別）約過你嗎", ansA: "有", ansB: "沒有", Anext:"/Q/3", Bnext:"/Q/3"},
-	{qnum:3, title:"關於工具人", ansA: "我是工具人", ansB: "我有工具人", ansC:"我不是工具人也沒有工具人", Anext:"/Q/4", Bnext:"/Q/4", Cnext:"/Q/5"},
+	{qnum:2, title:"你有約會過嗎/有喜歡的那個性別約過你嗎", ansA: "有", ansB: "沒有", Anext:"/Q/3", Bnext:"/Q/3"},
+	{qnum:3, title:"關於工具人", ansA: "我是工具人", ansB: "我有工具人", ansC:"我不是工具人也沒有工具人", Anext:"/Q/4", Bnext:"/Q/4", Cnext:"/Q/4"},
 	{qnum:4, title:"你會煮菜嗎", ansA: "會", ansB: "不會", Anext:"/Q/5", Bnext:"/Q/6"},
 	{qnum:5, title:"你煮的菜好吃嗎", ansA: "好吃", ansB: "不好吃", Anext:"/Q/6", Bnext:"/Q/6"},
 	{qnum:6, title:"你常穿系服/營服/睡衣出門嗎", ansA: "常", ansB: "不常", Anext:"/Q/7", Bnext:"/Q/7"},
@@ -51,14 +52,17 @@ app.get('/result', function(req, res){
 
 app.get('/Q/:qnum', function(req, res){
 
+	// Read pulse number from pulse.txt
 	fs.readFile('pulse.txt', 'utf8', function(err,data){
 		if (err) throw err;
+		//recode time and pulse number per question
 		var d = new Date();
 		time.push(d.getTime());
 		pulse.push(parseInt(data));
 		console.log('time',time,'pulse',pulse);
 	});
 
+	// Go to the next question according to questions[]
 	res.render('questions',{Q:questions[parseInt(req.params.qnum)-1]});
 })
 

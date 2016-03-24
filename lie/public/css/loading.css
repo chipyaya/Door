@@ -1,12 +1,13 @@
 #fountainTextG{
-	width:234px;
-	margin:auto;
+	width:500px;
+	display: inline-block;
+	line-height: 800px;
 }
 
 .fountainTextG{
 	color:rgb(0,0,0);
 	font-family:Arial;
-	font-size:24px;
+	font-size:100px;
 	text-decoration:none;
 	font-weight:normal;
 	font-style:normal;

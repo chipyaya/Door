@@ -1,12 +1,13 @@
 body{
-	background-image: url("../img/bg.png");
+	//background-image: url("../img/bg.png");
 }
 
 #intro{
-	background: black;
-	border-radius:25px; 
-	opacity:0.8;
+	//background: black;
+	//border-radius:25px; 
+	//opacity:0.8;
 	height:500px;
+	border-style: solid;
 }
 
 #intro div{
@@ -14,11 +15,31 @@ body{
 }
 
 #intro p{
-	color:white;
+	//color:white;
 	font-size:25px;
 	line-height: 80px;
 	margin-left:50px;
 }
+
+.button_start{
+	display: inline-block;
+    border: 2px solid #000000;
+	border-radius: 20px;
+	font-family: Consolas, monaco, monospace;
+    color: black;
+    text-decoration: none;
+    font-size: 25px;
+    margin: 30px 5px;
+	padding: 15px 20px;
+    cursor: pointer;
+}
+
+.button_start:hover {
+    background-color: black;
+    color: white;
+    border: 2px solid #ffffff;
+}
+
 #center{
 	text-align: center;
 }
@@ -29,29 +50,27 @@ body{
 	width: 80%;
 }
 
-.blackBlock{
-	background-color: black;
+.block{
 	border-radius:25px; 
-	opacity: 0.8;
+	border-style: solid;
 	margin: 70px 10px;
 	height: 750px;
 }
 
 .caution{
-	color: white;
+	color: black;
 	font-family: Consolas, monaco, monospace;
     font-size: 35px;
     margin: 30px 5px;
 }
 
 .ques_choice{
-
 	padding: 70px 80px;
 }
 
 
 h1.question{
-	color: white;
+	color: black;
 	font-family: Consolas, monaco, monospace;
 	padding: 30px 0px;
 }
@@ -63,11 +82,10 @@ h1.question{
 }
 
 .button_c {
-    background-color: black;
     border: 2px solid #000000;
 	border-radius: 20px;
 	font-family: Consolas, monaco, monospace;
-    color: white;
+    color: black;
     text-align: left;
     text-decoration: none;
     display: inline-block;
@@ -78,25 +96,21 @@ h1.question{
 }
 
 .button_c:hover {
-    background-color: white;
-    color: black;
-    border: 2px solid #ffffff;
-}
-
-.button_begin{
+    background-color: black;
+    color: white;
     border: 2px solid #ffffff;
 }
 
 #success_notice{
 	display:none;
-	background:black;
-	position:absolute;
-	height:100px;
-	width:200px;
-	top:200px;
+	//position:absolute;
+	//height:100px;
+	//width:200px;
+	//top:200px;
 }
 #success_notice span{
-	color:white;
+	font-size:25px;
+	display: inline-block;
 }
 
 #share{

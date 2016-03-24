@@ -10,9 +10,9 @@ block content
 				p.left 魯蛇: 
 				p.mid 70% 
 			.small#time	   
-				p.midtime  #{T[0]}
-				p.midtime  #{T[1]}
-				p.midtime  #{T[2]}
+				p.midtime#time_ymd  
+				p.midtime#time_t  
+				p.midtime#time_day 
 			.small#QRcode  
 				img.display(src='img/qr_code.jpg') 
 				p.midcode  NTUAF
@@ -22,7 +22,5 @@ block content
 				marquee(scrollamount="20")
 					p.marqtext #{M}
 
-
-
-
+	script(src='/js/time.js')
 

@@ -62,8 +62,8 @@ int main(int argc, char** argv){
 	D.copyTo( C(roi));
 
 	// Save the new png
-	imshow("C", C);
-	imwrite("composite.png", C);
+	//imshow("C", C);
+	imwrite("./public/img/composite.png", C);
 
 	// wait: use for imshow
 	waitKey(0);

@@ -44,7 +44,6 @@ var questions=[
 var exec = require('child_process').execFile;
 
 var composite = function(){
-	console.log("composite() start");
 	exec('./loo/loo', function(err, data) {  
 		console.log(err)
 		console.log(data.toString());                       
@@ -87,7 +86,6 @@ app.post('/A', function(req, res){
 	console.log('req.body.ans',req.body.ans);
 })
 
-
 app.post('/upload', function(req, res){
 	var token = req.body.token;
 	var name = req.body.name;
@@ -111,10 +109,6 @@ app.post('/upload', function(req, res){
 	form.pipe(request);
 	res.end();
 })
-
-
-
-
 
 app.listen(3000, function () {
 	console.log('Example app listening on port 3000!');

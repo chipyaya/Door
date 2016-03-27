@@ -5,7 +5,10 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var fs = require("fs");
-
+var FB = require('fb');
+var FormData = require('form-data');
+var request = require('request');
+var https = require('https');
 //var routes = require('./routes/index');
 //var users = require('./routes/users');
 
@@ -37,7 +40,6 @@ var questions=[
 	{qnum:13, title:"你覺得自己帥/美嗎", ansA: "是", ansB: "否", Anext:"/Q/14", Bnext:"/Q/14"},
 	{qnum:14, title:"你覺得自己魯/溫", ansA: "魯", ansB: "溫", Anext:"/result", Bnext:"/result"}
 ];
-
 
 app.get('/', function(req, res){
 	res.render('index');
@@ -73,6 +75,35 @@ app.get('/share', function(req, res){
 app.post('/A', function(req, res){
 	console.log('req.body.ans',req.body.ans);
 })
+
+
+app.post('/upload', function(req, res){
+	var token = req.body.token;
+	var name = req.body.name;
+	var ACCESS_TOKEN =token;
+
+	var form = new FormData(); //Create multipart form
+	form.append('file', fs.createReadStream('bg.png')); //Put file
+	form.append('message', name+' is a Loser.'); //Put message
+	 
+	var options = {
+	    method: 'post',
+	    host: 'graph.facebook.com',
+	    path: '/me/photos?access_token='+ACCESS_TOKEN,
+	    headers: form.getHeaders(),
+	}
+	 
+	var request = https.request(options, function (res){
+	     console.log(res);
+	});
+	 
+	form.pipe(request);
+	res.end();
+})
+
+
+
+
 
 app.listen(3000, function () {
 	console.log('Example app listening on port 3000!');

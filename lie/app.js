@@ -83,7 +83,7 @@ app.post('/upload', function(req, res){
 	var ACCESS_TOKEN =token;
 
 	var form = new FormData(); //Create multipart form
-	form.append('file', fs.createReadStream('bg.png')); //Put file
+	form.append('file', fs.createReadStream('public/img/bg.png')); //Put file
 	form.append('message', name+' is a Loser.'); //Put message
 	 
 	var options = {

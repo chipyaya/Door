@@ -23,7 +23,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 var astros = [];
 var daily_astro;
-var time = [];
 
 for(var i = 0; i<12; i++){
 	astros.push(i);
@@ -35,15 +34,6 @@ function changeMarquee(){
 }
 */
 
-function getTime(){
-	var D = new Date();
-	time.push(D.getFullYear()+"."+(D.getMonth()+1)+"."+D.getDate());
-	time.push(D.getHours()+":"+D.getMinutes());
-
-	var dayList = ["Sun.", "Mon.", "Tue.", "Wed.", "Thu.", "Fri.", "Sat."];
-	time.push(dayList[D.getDay()]);
-	//console.log(time);
-}
 
 function get_astro_daily(){
 	var date = new Date();
@@ -75,11 +65,10 @@ function get_astro_daily(){
 	});
 }
 
-getTime();
 get_astro_daily();
 
 app.get('/', function(req, res){
-	res.render('index', {M:daily_astro, T:time});
+	res.render('index', {M:daily_astro});
 })
 
 app.listen(3001, function () {

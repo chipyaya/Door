@@ -38,6 +38,15 @@ var questions=[
 	{qnum:14, title:"你覺得自己魯/溫", ansA: "魯", ansB: "溫", Anext:"/result", Bnext:"/result"}
 ];
 
+var exec = require('child_process').execFile;
+
+var composite = function(){
+	console.log("composite() start");
+	exec('./loo/loo', function(err, data) {  
+		console.log(err)
+		console.log(data.toString());                       
+	});  
+}
 
 app.get('/', function(req, res){
 	res.render('index');
@@ -47,6 +56,7 @@ var pulse=[];
 var averagePulsePerQ=[];
 
 app.get('/result', function(req, res){
+	composite();
 	res.render('result');
 });
 

@@ -38,7 +38,7 @@ var questions=[
 	{qnum:11, title:"你會樂器/唱歌嗎", ansA: "會", ansB: "不會", Anext:"/Q/12", Bnext:"/Q/12"},
 	{qnum:12, title:"∫(1+e^2x)dx=?", ansA: "會", ansB: "不會", Anext:"/Q/13", Bnext:"/Q/13"},
 	{qnum:13, title:"你覺得自己帥/美嗎", ansA: "是", ansB: "否", Anext:"/Q/14", Bnext:"/Q/14"},
-	{qnum:14, title:"你覺得自己魯/溫", ansA: "魯", ansB: "溫", Anext:"/result", Bnext:"/result"}
+	{qnum:14, title:"你覺得自己魯/溫", ansA: "魯", ansB: "溫", Anext:"/share", Bnext:"/share"}
 ];
 
 var exec = require('child_process').execFile;
@@ -57,9 +57,9 @@ var time=[];
 var pulse=[];
 var averagePulsePerQ=[];
 
-app.get('/result', function(req, res){
+app.get('/share', function(req, res){
 	composite();
-	res.render('result');
+	res.render('sharephoto');
 });
 
 app.get('/Q/:qnum', function(req, res){
@@ -76,10 +76,6 @@ app.get('/Q/:qnum', function(req, res){
 
 	// Go to the next question according to questions[]
 	res.render('questions',{Q:questions[parseInt(req.params.qnum)-1]});
-})
-
-app.get('/share', function(req, res){
-	res.render('sharephoto');
 })
 
 app.post('/A', function(req, res){

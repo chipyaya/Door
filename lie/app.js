@@ -44,7 +44,7 @@ var questions=[
 var exec = require('child_process').execFile;
 
 var composite = function(){
-	exec('./loo/loo', function(err, data) {  
+	exec('./processImg/commands', function(err, data) {  
 		console.log(err)
 		console.log(data.toString());                       
 	});  

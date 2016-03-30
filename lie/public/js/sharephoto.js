@@ -17,17 +17,32 @@ window.fbAsyncInit = function(){
 
 function statusChangeCallback(response) {
 	
-	
 	FB.login(function(response) {
 	
-	var access_token = response.authResponse.accessToken;
+		var access_token = response.authResponse.accessToken;
 
 	    FB.api('/me', function(response) {
 			var user_name = response.name;
 			var user_id = response.id;
-			$.post('/upload',{token:access_token, name:user_name},function(result){
+			
+			
+			$.post('/uploadtofb',{token:access_token, name:user_name},function(result){
 				$('#success_notice').show();
 			});
+			
+			/*
+			FB.api('/me/photos', 'post', {
+ 		        message: user_name+' is a Loser',
+ 		        url: 'http://media.premiumtimesng.com/wp-content/files/2015/10/snake-medicine.jpg'
+ 		    }, function (response) {
+ 
+ 		        if (!response || response.error) {
+ 		            console.log(response);
+ 		        } else {
+ 		            $('#success_notice').show();
+ 		        }
+ 		    });  
+ 		    */  
 		});
 	}, {scope: 'publish_actions'});    
 }
@@ -44,3 +59,16 @@ function logout(){
   		window.location.href='/';
 	});
 }
+
+function uploadtofb(){
+	checkLoginState();
+}
+
+function uploadtoimgur(){
+	$('#loading').css('display','block');
+	$('.content').css('display','none');
+	$.get('/uploadtoimgur',function(result){
+		window.location.href='/share';
+	});
+}
+

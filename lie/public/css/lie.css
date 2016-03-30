@@ -40,8 +40,17 @@ body{
     border: 2px solid #ffffff;
 }
 
-#center{
+.center{
+	text-align:center;
+}
+
+#loading{
+	position:absolute;
+	top:0;
+	left:50%;
+	z-index:99;
 	text-align: center;
+	display:none;
 }
 
 .content{

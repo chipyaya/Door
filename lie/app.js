@@ -9,6 +9,7 @@ var FB = require('fb');
 var FormData = require('form-data');
 var request = require('request');
 var https = require('https');
+var imgur = require('imgur');
 //var routes = require('./routes/index');
 //var users = require('./routes/users');
 
@@ -22,6 +23,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+imgur.setCredentials('anndad1993@yahoo.com.tw', 'loodoor12345', '2e501adb452625d');
 
 // About the content of all questions and the next question number(or result page)
 var questions=[
@@ -38,7 +41,7 @@ var questions=[
 	{qnum:11, title:"你會樂器/唱歌嗎", ansA: "會", ansB: "不會", Anext:"/Q/12", Bnext:"/Q/12"},
 	{qnum:12, title:"∫(1+e^2x)dx=?", ansA: "會", ansB: "不會", Anext:"/Q/13", Bnext:"/Q/13"},
 	{qnum:13, title:"你覺得自己帥/美嗎", ansA: "是", ansB: "否", Anext:"/Q/14", Bnext:"/Q/14"},
-	{qnum:14, title:"你覺得自己魯/溫", ansA: "魯", ansB: "溫", Anext:"/result", Bnext:"/result"}
+	{qnum:14, title:"你覺得自己魯/溫", ansA: "魯", ansB: "溫"}
 ];
 
 app.get('/', function(req, res){
@@ -47,11 +50,24 @@ app.get('/', function(req, res){
 var time=[];
 var pulse=[];
 var averagePulsePerQ=[];
+var photourl="";
 
-app.get('/result', function(req, res){
-	res.render('result');
+app.get('/uploadtoimgur', function(req, res){
+	var albumId = 'fGZi1';
+	imgur.uploadFile('public/img/bg.png', albumId)
+	    .then(function (json) {
+	    	photourl = json.data.link
+	    	console.log(photourl);
+			res.render('sharephoto');
+	    })
+	    .catch(function (err) {
+	        console.error(err.message);
+	    });
 });
 
+app.get('/share', function(req,res){
+	res.render('sharephoto');
+});
 app.get('/Q/:qnum', function(req, res){
 
 	// Read pulse number from pulse.txt
@@ -68,16 +84,13 @@ app.get('/Q/:qnum', function(req, res){
 	res.render('questions',{Q:questions[parseInt(req.params.qnum)-1]});
 })
 
-app.get('/share', function(req, res){
-	res.render('sharephoto');
-})
-
 app.post('/A', function(req, res){
 	console.log('req.body.ans',req.body.ans);
 })
 
 
-app.post('/upload', function(req, res){
+app.get('/uploadtofb', function(req, res){
+
 	var token = req.body.token;
 	var name = req.body.name;
 	var ACCESS_TOKEN =token;

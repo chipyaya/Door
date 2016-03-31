@@ -78,7 +78,7 @@ app.get('/uploadtoimgur', function(req, res){		//call by pressing the button in 
 	var centerY = 100;
 	var shoulderW = 200;
 	//processing the image
-	exec('./processImg/commands', [level, centerX, centerY, shoulderW], function(err, data) {	
+	exec('./processImg/commands.sh', [level, centerX, centerY, shoulderW], function(err, data){	
 		console.log(err);
 		console.log(data.toString());                       
 		var albumId = 'fGZi1';

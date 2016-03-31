@@ -15,6 +15,8 @@ window.fbAsyncInit = function(){
 	fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));
 
+var photourl="";
+
 function statusChangeCallback(response) {
 	
 	FB.login(function(response) {
@@ -25,24 +27,37 @@ function statusChangeCallback(response) {
 			var user_name = response.name;
 			var user_id = response.id;
 
+	    	$('#fbmessage').fadeIn();
+
+		    /*
+	    	function upload(){
+		    	FB.api('/me/photos', 'post', {
+	 		        message: user_name+' is a Loser',
+	 		        //url: photourl
+	 		        url: 'http://imgur.com/1i2T4xS'
+	 		    }, function (response) {
+	 
+	 		        if (!response || response.error) {
+	 		            console.log(response);
+	 		        } else {
+	 		            $('#success_notice_fb').fadeIn();
+	 		        }
+	 		    }); 
+	    		$.post('/uploadtofb',{token:access_token, name:user_name},function(result){
+					$('#success_notice').show();
+				});
+		    }
+	    	*/	
+	    	$('#fbmessage button').click(function(){
+	    		$.post('/uploadtofb',{token:access_token, name:user_name, message:$('#fbmessage input').val()},function(result){
+					$('#fbmessage').hide()
+					$('#success_notice_fb').fadeIn();
+				});
+	    	});
+ 		    
 			
-			$.post('/uploadtofb',{token:access_token, name:user_name},function(result){
-				$('#success_notice').show();
-			});
 			
-			/*
-			FB.api('/me/photos', 'post', {
- 		        message: user_name+' is a Loser',
- 		        url: 'http://media.premiumtimesng.com/wp-content/files/2015/10/snake-medicine.jpg'
- 		    }, function (response) {
- 
- 		        if (!response || response.error) {
- 		            console.log(response);
- 		        } else {
- 		            $('#success_notice').show();
- 		        }
- 		    });  
- 		    */  
+ 		     
 		});
 	}, {scope: 'publish_actions'});    
 }
@@ -54,10 +69,9 @@ function checkLoginState() {
 
 }
 
-function logout(){
-	FB.logout(function(response) {	
-  		window.location.href='/';
-	});
+function restart(){
+	FB.logout(function(response) {});
+	window.location.replace('/');
 }
 
 function uploadtofb(){
@@ -69,6 +83,8 @@ function uploadtoimgur(){
 	$('.content').css('display','none');
 	$.get('/uploadtoimgur',function(result){
 		window.location.href='/share';
+		photourl = result;
+		console.log('result',result);
 	});
 }
 

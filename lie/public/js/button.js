@@ -1,10 +1,6 @@
-var countA = 1;
-var countB = 1;
+$(document).ready(function() {
+	$('#success_notice_qrcode .button_start, #success_notice_qrcode .button_start').click(function(){
+		$(this).parent().fadeOut();
+	});
 
-document.getElementById('A').onclick = function(){
-	alert("A was clicked " + (countA++) + " times"):
-}
-
-document.getElementById('B').onclick = function(){
-	alert("B was clicked " + (countB++) + " times"):
-}
+});

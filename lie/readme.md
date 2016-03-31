@@ -22,6 +22,8 @@ convert -fill OOO.png white opaque green XXX.png	//all green to white
 convert blackHat.png -fuzz 30% -alpha set -channel RGBA -fill none -opaque white result.png	//white to transparent
 convert person.png -resize 400% person2.png							 //resize
 convert bg.png person2.png -geometry +400+800 -composite bg-over.png //composite!!
+convert -crop 500x800+280+150 chiou2.png tmp.png	// crop subimage ([size]+startx+starty)
+
 ```
 
 # Magick++

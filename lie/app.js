@@ -73,8 +73,12 @@ app.get('/Q/:qnum', function(req, res){
 })
 
 app.get('/uploadtoimgur', function(req, res){		//call by pressing the button in question.jade
-	exec('./processImg/commands', function(err, data) {		//processing the image
-		console.log(err)
+	var level = 1;	//depends on %
+	var centerX = 100;
+	var centerY = 100;
+	var shoulderW = 200;
+	exec('./processImg/commands', [level, centerX, centerY, shoulderW], function(err, data) {	//processing the image
+		console.log(err);
 		console.log(data.toString());                       
 		var albumId = 'fGZi1';
 		imgur.uploadFile('public/img/composite.png', albumId)	//upload to imgur

@@ -12,7 +12,8 @@ block content
 					a(onclick="uploadtoimgur()")#A.button_c &#9758; #{Q.ansA}
 					a(onclick="uploadtoimgur()")#B.button_c &#9758; #{Q.ansB}
 				if (typeof(Q.ansC) !== 'undefined')
-					a(href="#{Q.Cnext}")#C.tlt_c2.button_c &#9758; #{Q.ansC}
+					a(href="#{Q.Cnext}")#C.button_c &#9758; #{Q.ansC}
+	//display after pressing the button in Q14 (implement in uploadtoimgur()
 	#loading.text-center
 		#fountainTextG
 				.fountainTextG#fountainTextG_1 L
@@ -22,9 +23,10 @@ block content
 				.fountainTextG#fountainTextG_5 i
 				.fountainTextG#fountainTextG_6 n
 				.fountainTextG#fountainTextG_7 g
+	// for animation of text
 	script(src='/js/jquery.lettering.js')
 	script(src='/js/jquery.fittext.js')
 	script(src='/js/jquery.textillate.js')
 	script(src='/js/tlt.js')
-	script(src='/js/button.js')
+	
 	script(src='/js/sharephoto.js')

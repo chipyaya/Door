@@ -11,8 +11,7 @@ var request = require('request');
 var https = require('https');
 var imgur = require('imgur');
 var qr = require('qr-image');
-
-
+var exec = require('child_process').execFile;
 //var routes = require('./routes/index');
 //var users = require('./routes/users');
 
@@ -47,42 +46,15 @@ var questions=[
 	{qnum:14, title:"你覺得自己魯/溫", ansA: "魯", ansB: "溫"}
 ];
 
-var exec = require('child_process').execFile;
 
-app.get('/', function(req, res){
-	res.render('index');
-})
 var time=[];
 var pulse=[];
 var averagePulsePerQ=[];
 var photourl="";
 
-app.get('/uploadtoimgur', function(req, res){
-	exec('./processImg/commands', function(err, data) {  
-		console.log(err)
-		console.log(data.toString());                       
-		var albumId = 'fGZi1';
-		imgur.uploadFile('public/img/composite.png', albumId)
-		    .then(function (json) {
-		    	photourl = json.data.link
-		    	console.log(photourl);
-				res.end();
-		    })
-		    .catch(function (err) {
-		        console.error(err.message);
-		    });
-	}); 
-});
-
-app.get('/makeqrcode', function(req,res){
-	var qrcode = qr.image('http://i.imgur.com/96ySytj.png', { type: 'svg' });
-	res.type('svg');
-	qrcode.pipe(res);
-});
-
-app.get('/share', function(req, res){
-	res.render('sharephoto');
-});
+app.get('/', function(req, res){
+	res.render('index');
+})
 
 app.get('/Q/:qnum', function(req, res){
 
@@ -100,19 +72,49 @@ app.get('/Q/:qnum', function(req, res){
 	res.render('questions',{Q:questions[parseInt(req.params.qnum)-1]});
 })
 
+app.get('/uploadtoimgur', function(req, res){		//call by pressing the button in question.jade
+	exec('./processImg/commands', function(err, data) {		//processing the image
+		console.log(err)
+		console.log(data.toString());                       
+		var albumId = 'fGZi1';
+		imgur.uploadFile('public/img/composite.png', albumId)	//upload to imgur
+		    .then(function (json) {
+		    	photourl = json.data.link
+		    	console.log(photourl);
+				res.end();
+		    })
+		    .catch(function (err) {
+		        console.error(err.message);
+		    });
+	}); 
+});															// return to sharephoto.js
+
+app.get('/makeqrcode', function(req,res){		//call by pressing the button in questions.jade
+	var qrcode = qr.image('http://i.imgur.com/96ySytj.png', { type: 'svg' });	
+	res.type('svg');
+	qrcode.pipe(res);
+});
+
+app.get('/share', function(req, res){
+	res.render('sharephoto');
+});
+
+
+//unused?
 app.post('/A', function(req, res){
 	console.log('req.body.ans',req.body.ans);
 })
 
-app.post('/upload', function(req, res){
+app.post('/upload', function(req, res){			//call by sharephoto.js
 
+	console.log("hi");
 	var token = req.body.token;
 	var name = req.body.name;
 	var ACCESS_TOKEN =token;
 
-	var form = new FormData(); //Create multipart form
-	form.append('file', fs.createReadStream('public/img/bg.png')); //Put file
-	form.append('message', name+' is a Loser.'); //Put message
+	var form = new FormData();					//Create multipart form
+	form.append('file', fs.createReadStream('public/img/bg.png')); //Put file(要改成composite.png)
+	form.append('message', name+' is a Loser.'); //Put message(要因照片而異)
 	 
 	var options = {
 	    method: 'post',

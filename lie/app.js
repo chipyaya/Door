@@ -60,7 +60,7 @@ var photourl="";
 app.get('/uploadtoimgur', function(req, res){
 	exec('./processImg/commands', function(err, data) {  
 		console.log(err)
-		console.log(data.toString());                       
+		console.log('data',data.toString());                       
 		var albumId = 'fGZi1';
 		imgur.uploadFile('public/img/composite.png', albumId)
 		    .then(function (json) {
@@ -104,15 +104,17 @@ app.post('/A', function(req, res){
 	console.log('req.body.ans',req.body.ans);
 })
 
-app.post('/upload', function(req, res){
+app.post('/uploadtofb', function(req, res){
 
 	var token = req.body.token;
 	var name = req.body.name;
+	var message = req.body.message;
+	
 	var ACCESS_TOKEN =token;
 
 	var form = new FormData(); //Create multipart form
 	form.append('file', fs.createReadStream('public/img/bg.png')); //Put file
-	form.append('message', name+' is a Loser.'); //Put message
+	form.append('message', message); //Put message
 	 
 	var options = {
 	    method: 'post',

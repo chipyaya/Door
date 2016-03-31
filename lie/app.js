@@ -89,14 +89,14 @@ app.get('/uploadtoimgur', function(req, res){		//call by pressing the button in 
 	}); 
 });															// return to sharephoto.js
 
-app.get('/makeqrcode', function(req,res){		//call by pressing the button in questions.jade
+app.get('/share', function(req, res){			//call by pressing the button in questions.jade
+	res.render('sharephoto');
+});
+
+app.get('/makeqrcode', function(req,res){		//call by pressing the button in sharephoto.jade
 	var qrcode = qr.image('http://i.imgur.com/96ySytj.png', { type: 'svg' });	
 	res.type('svg');
 	qrcode.pipe(res);
-});
-
-app.get('/share', function(req, res){
-	res.render('sharephoto');
 });
 
 
@@ -107,7 +107,6 @@ app.post('/A', function(req, res){
 
 app.post('/upload', function(req, res){			//call by sharephoto.js
 
-	console.log("hi");
 	var token = req.body.token;
 	var name = req.body.name;
 	var ACCESS_TOKEN =token;

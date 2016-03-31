@@ -36,11 +36,7 @@ body{
     border: 2px solid #ffffff;
 }
 
-.center{
-	text-align:center;
-}
-
-#loading{
+#load{
 	position:absolute;
 	top:0;
 	left:50%;
@@ -106,14 +102,15 @@ h1.question{
     border: 2px solid #ffffff;
 }
 
-#success_notice{
+#success_notice_qrcode, #success_notice_fb{
+	border:2px solid #000000;
 	display:none;
-	//position:absolute;
-	//height:100px;
-	//width:200px;
-	//top:200px;
+	position:absolute;
+	height:300px;
+	width:300px;
+	z-index:99;
 }
-#success_notice span{
+#success_notice_qrcode span, #success_notice_fb span{
 	font-size:25px;
 	display: inline-block;
 }

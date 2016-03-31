@@ -4,25 +4,18 @@ block content
 	//script(src='/js/processImg.js')
 	script(src='/js/sharephoto.js')
 	h1.text-center 魯門的世界
-	#intro.col-md-6.col-md-offset-3
-		#load
-			#center
-				.fountainTextG#fountainTextG_1 L
-				.fountainTextG#fountainTextG_2 o
-				.fountainTextG#fountainTextG_3 a
-				.fountainTextG#fountainTextG_4 d
-				.fountainTextG#fountainTextG_5 i
-				.fountainTextG#fountainTextG_6 n
-				.fountainTextG#fountainTextG_7 g
-
-		#result
-			#center
-				img(src='/img/composite.png' alt="result" height="400px")
-				a(href="#" onclick="checkLoginState()").button_start 登入並上傳照片至Facebook
-				a(href="#" onclick="downloadphoto()").button_start QR-code下載照片
-				#success_notice
-					span 上傳成功! 快去Facebook看看吧!
-					br
-					.button_start(onclick="logout()") 確定
-	
+	#intro.col-md-6.col-md-offset-3.text-center
+		img(src='/img/composite.png' alt="result" height="400px")
+		#success_notice_fb
+			span 上傳成功! 快去Facebook看看吧!
+			br
+			.button_start 關閉
+		#success_notice_qrcode
+			img#qrcode(width=100, heigth=100)
+			.button_start 關閉
+		a(href="#" onclick="checkLoginState()").button_start Fb登入並上傳照片
+		a(href="#" onclick="makeqrcode()").button_start QR-code下載照片
+		a(href="/" onclick="logout()").button_start 結束
+		
 	script(src='/js/loading.js')
+	script(src='/js/button.js')

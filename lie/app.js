@@ -77,7 +77,8 @@ app.get('/uploadtoimgur', function(req, res){		//call by pressing the button in 
 	var centerX = 100;
 	var centerY = 100;
 	var shoulderW = 200;
-	exec('./processImg/commands', [level, centerX, centerY, shoulderW], function(err, data) {	//processing the image
+	//processing the image
+	exec('./processImg/commands', [level, centerX, centerY, shoulderW], function(err, data) {	
 		console.log(err);
 		console.log(data.toString());                       
 		var albumId = 'fGZi1';
@@ -109,16 +110,18 @@ app.post('/A', function(req, res){
 	console.log('req.body.ans',req.body.ans);
 })
 
-app.post('/upload', function(req, res){			//call by sharephoto.js
+app.post('/uploadtofb', function(req, res){		//call by sharephoto.js
 
 	var token = req.body.token;
 	var name = req.body.name;
+	var message = req.body.message;
+	
 	var ACCESS_TOKEN =token;
 
-	var form = new FormData();					//Create multipart form
-	form.append('file', fs.createReadStream('public/img/bg.png')); //Put file(要改成composite.png)
-	form.append('message', name+' is a Loser.'); //Put message(要因照片而異)
-	 
+	var form = new FormData(); //Create multipart form
+	form.append('file', fs.createReadStream('public/img/bg.png')); //Put file
+	form.append('message', message); //Put message
+
 	var options = {
 	    method: 'post',
 	    host: 'graph.facebook.com',

@@ -15,6 +15,8 @@ window.fbAsyncInit = function(){
 	fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));
 
+var photourl="";
+
 function statusChangeCallback(response) {
 	
 	FB.login(function(response) {
@@ -25,24 +27,34 @@ function statusChangeCallback(response) {
 			var user_name = response.name;
 			var user_id = response.id;
 
-			
-			$.post('/upload',{token:access_token, name:user_name},function(result){
-				$('#success_notice_fb').show();
-			});
-			
-			/*
-			FB.api('/me/photos', 'post', {
- 		        message: user_name+' is a Loser',
- 		        url: 'http://media.premiumtimesng.com/wp-content/files/2015/10/snake-medicine.jpg'
- 		    }, function (response) {
- 
- 		        if (!response || response.error) {
- 		            console.log(response);
- 		        } else {
- 		            $('#success_notice').show();
- 		        }
- 		    });  
- 		    */  
+	    	$('#fbmessage').fadeIn();
+
+		    /*
+	    	function upload(){
+		    	FB.api('/me/photos', 'post', {
+	 		        message: user_name+' is a Loser',
+	 		        //url: photourl
+	 		        url: 'http://imgur.com/1i2T4xS'
+	 		    }, function (response) {
+	 
+	 		        if (!response || response.error) {
+	 		            console.log(response);
+	 		        } else {
+	 		            $('#success_notice_fb').fadeIn();
+	 		        }
+	 		    }); 
+	    		$.post('/uploadtofb',{token:access_token, name:user_name},function(result){
+					$('#success_notice').show();
+				});
+		    }
+	    	*/	
+	    	$('#fbmessage button').click(function(){
+	    		$.post('/uploadtofb',{token:access_token, name:user_name, message:$('#fbmessage input').val()},function(result){
+					$('#fbmessage').hide()
+					$('#success_notice_fb').fadeIn();
+				});
+	    	});	
+ 		     
 		});
 	}, {scope: 'publish_actions'});    
 }
@@ -54,10 +66,9 @@ function checkLoginState() {				//call by the button "login Fb and upload img"
 
 }
 
-function logout(){							//call by the button "END"
-	FB.logout(function(response) {			//logout FB account
-  		window.location.href='/';			//Go back to /
-	});
+function restart(){                         //call by the button "END"
+	FB.logout(function(response) {});       //logout FB account
+	window.location.replace('/');           //Go back to / 
 }
 
 function uploadtofb(){						//unused?
@@ -65,6 +76,7 @@ function uploadtofb(){						//unused?
 }
 
 function uploadtoimgur(){
+
 	$('#loading').css('display','block');		//display "loading" animation
 	$('.content').css('display','none');		//hide Q14 content
 	$.get('/uploadtoimgur',function(result){	//go to app.js

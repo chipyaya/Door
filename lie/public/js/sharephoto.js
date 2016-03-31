@@ -24,7 +24,7 @@ function statusChangeCallback(response) {
 	    FB.api('/me', function(response) {
 			var user_name = response.name;
 			var user_id = response.id;
-			
+
 			
 			$.post('/uploadtofb',{token:access_token, name:user_name},function(result){
 				$('#success_notice').show();
@@ -71,4 +71,14 @@ function uploadtoimgur(){
 		window.location.href='/share';
 	});
 }
+
+function makeqrcode(){
+	$.get('/makeqrcode',function(data){
+		$('#qrcode').attr('src','makeqrcode');
+		console.log(data);
+		$('#success_notice_qrcode').fadeIn();
+	});
+}
+
+
 

@@ -1,17 +1,11 @@
-#fountainTextG{
-	width:500px;
-	display: inline-block;
-	line-height: 800px;
-}
-
 .fountainTextG{
+	display: inline-block;
 	color:rgb(0,0,0);
 	font-family:Arial;
 	font-size:100px;
 	text-decoration:none;
 	font-weight:normal;
 	font-style:normal;
-	float:left;
 	animation-name:bounce_fountainTextG;
 	-o-animation-name:bounce_fountainTextG;
 	-ms-animation-name:bounce_fountainTextG;

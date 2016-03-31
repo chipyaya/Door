@@ -10,6 +10,9 @@ var FormData = require('form-data');
 var request = require('request');
 var https = require('https');
 var imgur = require('imgur');
+var qr = require('qr-image');
+
+
 //var routes = require('./routes/index');
 //var users = require('./routes/users');
 
@@ -44,6 +47,8 @@ var questions=[
 	{qnum:14, title:"你覺得自己魯/溫", ansA: "魯", ansB: "溫"}
 ];
 
+var exec = require('child_process').execFile;
+
 app.get('/', function(req, res){
 	res.render('index');
 })
@@ -53,21 +58,32 @@ var averagePulsePerQ=[];
 var photourl="";
 
 app.get('/uploadtoimgur', function(req, res){
-	var albumId = 'fGZi1';
-	imgur.uploadFile('public/img/bg.png', albumId)
-	    .then(function (json) {
-	    	photourl = json.data.link
-	    	console.log(photourl);
-			res.render('sharephoto');
-	    })
-	    .catch(function (err) {
-	        console.error(err.message);
-	    });
+	exec('./processImg/commands', function(err, data) {  
+		console.log(err)
+		console.log(data.toString());                       
+		var albumId = 'fGZi1';
+		imgur.uploadFile('public/img/composite.png', albumId)
+		    .then(function (json) {
+		    	photourl = json.data.link
+		    	console.log(photourl);
+				res.end();
+		    })
+		    .catch(function (err) {
+		        console.error(err.message);
+		    });
+	}); 
 });
 
-app.get('/share', function(req,res){
+app.get('/makeqrcode', function(req,res){
+	var qrcode = qr.image('http://i.imgur.com/96ySytj.png', { type: 'svg' });
+	res.type('svg');
+	qrcode.pipe(res);
+});
+
+app.get('/share', function(req, res){
 	res.render('sharephoto');
 });
+
 app.get('/Q/:qnum', function(req, res){
 
 	// Read pulse number from pulse.txt
@@ -88,8 +104,7 @@ app.post('/A', function(req, res){
 	console.log('req.body.ans',req.body.ans);
 })
 
-
-app.get('/uploadtofb', function(req, res){
+app.post('/upload', function(req, res){
 
 	var token = req.body.token;
 	var name = req.body.name;
@@ -113,10 +128,6 @@ app.get('/uploadtofb', function(req, res){
 	form.pipe(request);
 	res.end();
 })
-
-
-
-
 
 app.listen(3000, function () {
 	console.log('Example app listening on port 3000!');

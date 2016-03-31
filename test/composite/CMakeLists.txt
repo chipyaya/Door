@@ -1,0 +1,5 @@
+cmake_minimum_required(VERSION 2.8)
+project( composite )
+find_package( OpenCV REQUIRED )
+add_executable( composite composite.cpp )
+target_link_libraries( composite ${OpenCV_LIBS} )

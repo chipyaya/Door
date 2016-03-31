@@ -1,14 +1,28 @@
 extends layout
 
 block content
+	//script(src='/js/processImg.js')
 	script(src='/js/sharephoto.js')
-	//-fb:login-button(scope='public_profile' onlogin="checkLoginState()")
 	h1.text-center 魯門的世界
 	#intro.col-md-6.col-md-offset-3
-		.center
-			a(href="#" onclick="uploadtofb()").button_start 登入並上傳照片至Facebook
-			a(href="#" onclick="downloadphoto()").button_start QR-code下載照片
-			#success_notice
-				span 上傳成功! 快去Facebook看看吧!
-				br
-				.button_start(onclick="logout()") 確定
+		#load
+			#center
+				.fountainTextG#fountainTextG_1 L
+				.fountainTextG#fountainTextG_2 o
+				.fountainTextG#fountainTextG_3 a
+				.fountainTextG#fountainTextG_4 d
+				.fountainTextG#fountainTextG_5 i
+				.fountainTextG#fountainTextG_6 n
+				.fountainTextG#fountainTextG_7 g
+
+		#result
+			#center
+				img(src='/img/composite.png' alt="result" height="400px")
+				a(href="#" onclick="checkLoginState()").button_start 登入並上傳照片至Facebook
+				a(href="#" onclick="downloadphoto()").button_start QR-code下載照片
+				#success_notice
+					span 上傳成功! 快去Facebook看看吧!
+					br
+					.button_start(onclick="logout()") 確定
+	
+	script(src='/js/loading.js')

@@ -36,12 +36,7 @@ body{
     border: 2px solid #ffffff;
 }
 
-#load{
-	position:absolute;
-	top:0;
-	left:50%;
-	z-index:99;
-	text-align: center;
+#loading{
 	display:none;
 }
 

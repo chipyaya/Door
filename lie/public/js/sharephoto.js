@@ -53,48 +53,42 @@ function statusChangeCallback(response) {
 					$('#fbmessage').hide()
 					$('#success_notice_fb').fadeIn();
 				});
-	    	});
- 		    
-			
-			
+	    	});	
  		     
 		});
 	}, {scope: 'publish_actions'});    
 }
 
-function checkLoginState() {
+function checkLoginState() {				//call by the button "login Fb and upload img" 
 	FB.getLoginStatus(function(response) {
-	    statusChangeCallback(response);
+	    statusChangeCallback(response);		//upload img to fb
 	});
 
 }
 
-function restart(){
-	FB.logout(function(response) {});
-	window.location.replace('/');
+function restart(){                         //call by the button "END"
+	FB.logout(function(response) {});       //logout FB account
+	window.location.replace('/');           //Go back to / 
 }
 
-function uploadtofb(){
+function uploadtofb(){						//unused?
 	checkLoginState();
 }
 
 function uploadtoimgur(){
-	$('#loading').css('display','block');
-	$('.content').css('display','none');
-	$.get('/uploadtoimgur',function(result){
-		window.location.href='/share';
-		photourl = result;
-		console.log('result',result);
+
+	$('#loading').css('display','block');		//display "loading" animation
+	$('.content').css('display','none');		//hide Q14 content
+	$.get('/uploadtoimgur',function(result){	//go to app.js
+		window.location.href='/share';			//go to /share
 	});
 }
 
-function makeqrcode(){
+function makeqrcode(){							//Call by the button "QRcode and download img"
 	$.get('/makeqrcode',function(data){
 		$('#qrcode').attr('src','makeqrcode');
-		console.log(data);
-		$('#success_notice_qrcode').fadeIn();
+		//console.log(data);
+		$('#success_notice_qrcode').fadeIn();	//display QRcode and the close button
 	});
 }
-
-
 

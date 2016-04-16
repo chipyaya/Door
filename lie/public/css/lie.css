@@ -6,10 +6,41 @@ h1{
 	color: white;
 }
 
-.bg_long{
-	width: 100%;
-	//background-size: cover;
+.q{
+	position: absolute;
+	z-index: -100;
 }
+
+.qbg1, .qbg2, .qbg3, .qbg4, .qbg5, .qbg6, .qbg7, .qbg8, .qbg9, .qbg10, .qbg11, .qbg12, .qbg13, .qbg14, .qbg15, .qbg16, .qbg17, .qbg18{
+	width: 100%;
+	z-index: -100;
+}
+
+.content{
+	z-index: 100;
+	left: 40%;
+	position: absolute;
+	transform: translateY(60%);
+}
+
+#q01{
+	background-image: url(/img/web_bg/web_div1.jpg);
+}
+#q02{
+	background-image: url(/img/web_bg/web_div2.jpg);
+}
+#q03{
+	background-image: url(/img/web_bg/web_div3.jpg);
+}
+#q04{
+	background-image: url(/img/web_bg/web_div4.jpg);
+}
+#q05{
+	background-image: url(/img/web_bg/web_div5.jpg);
+}
+
+//, #q03, #q04, #q05, #q06, #q07, #q08, #q09, #q10, #q11, #q12, #q13, #q14, #q15, #q16
+
 p{
 	color: white;
 }
@@ -31,31 +62,25 @@ p{
 
 .button_start{
 	display: inline-block;
-    border: 2px solid #000000;
+	border: 2px solid #000000;
 	border-radius: 20px;
 	font-family: Consolas, monaco, monospace;
-    color: white;
-    text-decoration: none;
-    font-size: 25px;
-    margin: 30px 5px;
+	color: white;
+	text-decoration: none;
+	font-size: 25px;
+	margin: 30px 5px;
 	padding: 15px 20px;
-    cursor: pointer;
+	cursor: pointer;
 }
 
 .button_start:hover {
-    background-color: white;
-    color: black;
-    border: 2px solid #ffffff;
+	background-color: white;
+	color: black;
+	border: 2px solid #ffffff;
 }
 
 #loading{
 	display:none;
-}
-
-.content{
-	padding: 10px 10px 0 10px;
-	margin: auto;
-	width: 80%;
 }
 
 .block{
@@ -68,8 +93,8 @@ p{
 .caution{
 	color: white;
 	font-family: Consolas, monaco, monospace;
-    font-size: 35px;
-    margin: 30px 5px;
+	font-size: 35px;
+	margin: 30px 5px;
 }
 
 .ques_choice{
@@ -90,23 +115,23 @@ h1.question{
 }
 
 .button_c {
-    border: 2px solid #000000;
+	border: 2px solid #000000;
 	border-radius: 20px;
 	font-family: Consolas, monaco, monospace;
-    color: white;
-    text-align: left;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 35px;
-    margin: 30px 5px;
+	color: white;
+	text-align: left;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 35px;
+	margin: 30px 5px;
 	padding: 15px 20px;
-    cursor: pointer;
+	cursor: pointer;
 }
 
 .button_c:hover {
-    background-color: white;
-    color: black;
-    border: 2px solid #ffffff;
+	background-color: white;
+	color: black;
+	border: 2px solid #ffffff;
 }
 
 #success_notice_qrcode, #success_notice_fb{

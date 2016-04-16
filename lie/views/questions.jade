@@ -1,9 +1,9 @@
 extends layout
 
 block content
-	img.bg_long(src="/img/web_bg/web_long.jpg")
-	.content
-		.block
+	script(src='/js/q.js')
+	.ha
+		.content
 			.ques_choice
 				h1.tlt_q.question Q#{Q.qnum} #{Q.title}
 				if (Q.qnum !== 14)
@@ -14,20 +14,61 @@ block content
 					a(onclick="uploadtoimgur()")#B.button_c &#9758; #{Q.ansB}
 				if (typeof(Q.ansC) !== 'undefined')
 					a(href="#{Q.Cnext}")#C.button_c &#9758; #{Q.ansC}
-	//display after pressing the button in Q14 (implement in uploadtoimgur()
-	#loading.text-center
-		#fountainTextG
-				.fountainTextG#fountainTextG_1 L
-				.fountainTextG#fountainTextG_2 o
-				.fountainTextG#fountainTextG_3 a
-				.fountainTextG#fountainTextG_4 d
-				.fountainTextG#fountainTextG_5 i
-				.fountainTextG#fountainTextG_6 n
-				.fountainTextG#fountainTextG_7 g
-	// for animation of text
-	script(src='/js/jquery.lettering.js')
-	script(src='/js/jquery.fittext.js')
-	script(src='/js/jquery.textillate.js')
-	script(src='/js/tlt.js')
-	
-	script(src='/js/sharephoto.js')
+
+		.container
+			.nav
+				ul
+					li(style="background-color:#46dd46")
+					li
+					li
+					li
+					li
+					li
+					li
+					li
+					li
+					li
+					li
+					li
+					li
+					li
+					li
+					li
+					li
+
+		.q
+			img.qbg1(src="/img/web_bg/web_div1.jpg")
+			img.qbg2(src="/img/web_bg/web_div1.jpg")
+			img.qbg3(src="/img/web_bg/web_div1.jpg")
+			img.qbg4(src="/img/web_bg/web_div1.jpg")
+			img.qbg5(src="/img/web_bg/web_div2.jpg")
+			img.qbg6(src="/img/web_bg/web_div3.jpg")
+			img.qbg7(src="/img/web_bg/web_div4.jpg")
+			img.qbg8(src="/img/web_bg/web_div5.jpg")
+			img.qbg9(src="/img/web_bg/web_div5.jpg")
+			img.qbg10(src="/img/web_bg/web_div5.jpg")
+			img.qbg11(src="/img/web_bg/web_div5.jpg")
+			img.qbg12(src="/img/web_bg/web_div5.jpg")
+			img.qbg13(src="/img/web_bg/web_div6.jpg")
+			img.qbg14(src="/img/web_bg/web_div1.jpg")
+			img.qbg15(src="/img/web_bg/web_div1.jpg")
+			img.qbg16(src="/img/web_bg/web_div1.jpg")
+			img.qbg17(src="/img/web_bg/web_div1.jpg")
+			img.qbg18(src="/img/web_bg/web_div1.jpg")
+			//display after pressing the button in Q14 (implement in uploadtoimgur()
+			//-#loading.text-center
+				#fountainTextG
+						.fountainTextG#fountainTextG_1 L
+						.fountainTextG#fountainTextG_2 o
+						.fountainTextG#fountainTextG_3 a
+						.fountainTextG#fountainTextG_4 d
+						.fountainTextG#fountainTextG_5 i
+						.fountainTextG#fountainTextG_6 n
+						.fountainTextG#fountainTextG_7 g
+			// for animation of text
+		script(src='/js/jquery.lettering.js')
+		script(src='/js/jquery.fittext.js')
+		script(src='/js/jquery.textillate.js')
+		script(src='/js/tlt.js')
+		
+		script(src='/js/sharephoto.js')

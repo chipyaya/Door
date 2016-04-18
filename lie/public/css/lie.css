@@ -12,34 +12,15 @@ h1{
 }
 
 .qbg1, .qbg2, .qbg3, .qbg4, .qbg5, .qbg6, .qbg7, .qbg8, .qbg9, .qbg10, .qbg11, .qbg12, .qbg13, .qbg14, .qbg15, .qbg16, .qbg17, .qbg18{
-	width: 100%;
-	z-index: -100;
+	background-image: url(/img/web_bg/web_div5.jpg);
+	background-size:cover;
+	height:100vh;
 }
 
 .content{
-	z-index: 100;
-	left: 40%;
-	position: absolute;
 	transform: translateY(60%);
 }
 
-#q01{
-	background-image: url(/img/web_bg/web_div1.jpg);
-}
-#q02{
-	background-image: url(/img/web_bg/web_div2.jpg);
-}
-#q03{
-	background-image: url(/img/web_bg/web_div3.jpg);
-}
-#q04{
-	background-image: url(/img/web_bg/web_div4.jpg);
-}
-#q05{
-	background-image: url(/img/web_bg/web_div5.jpg);
-}
-
-//, #q03, #q04, #q05, #q06, #q07, #q08, #q09, #q10, #q11, #q12, #q13, #q14, #q15, #q16
 
 p{
 	color: white;
@@ -96,11 +77,6 @@ p{
 	font-size: 35px;
 	margin: 30px 5px;
 }
-
-.ques_choice{
-	padding: 70px 80px;
-}
-
 
 h1.question{
 	color: white;

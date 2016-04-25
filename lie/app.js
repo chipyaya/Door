@@ -71,7 +71,7 @@ app.get('/uploadtoimgur', function(req, res){		//call by pressing the button in 
 	var level = 1;	//depends on %
 	var centerX = 100;
 	var centerY = 100;
-	var shoulderW = 200;
+	var shoulderW = 400;
 	//processing the image
 	exec('./processImg/commands.sh', [level, centerX, centerY, shoulderW], function(err, data){	
 		console.log(err);

@@ -59,6 +59,14 @@ app.post('/Q/:qnum', function(req, res){
 	res.end();
 })
 
+app.get('/loading', function(req,res){
+	res.render('loading');
+});
+
+app.get('/calculate', function(req,res){
+	res.end();
+});
+
 app.get('/uploadtoimgur', function(req, res){		//call by pressing the button in question.jade
 	var level = 1;	//depends on %
 	var centerX = 100;

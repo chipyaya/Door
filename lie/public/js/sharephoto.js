@@ -1,9 +1,9 @@
 window.fbAsyncInit = function(){
 	FB.init({
 		appId      : '970489853040863',
-		cookie     : true,
-		xfbml      : true,
-		version    : 'v2.5'
+	cookie     : true,
+	xfbml      : true,
+	version    : 'v2.5'
 	});
 };
 
@@ -18,50 +18,62 @@ window.fbAsyncInit = function(){
 var photourl="";
 
 function statusChangeCallback(response) {
-	
+
 	FB.login(function(response) {
-	
+
 		var access_token = response.authResponse.accessToken;
 
-	    FB.api('/me', function(response) {
+		FB.api('/me', function(response) {
 			var user_name = response.name;
 			var user_id = response.id;
 
-	    	$('#fbmessage').fadeIn();
+			//$('#fbmessage').fadeIn();
+			$( "#fbmessage" ).dialog({
+				modal: true,
+			});
 
-		    /*
-	    	function upload(){
-		    	FB.api('/me/photos', 'post', {
-	 		        message: user_name+' is a Loser',
-	 		        //url: photourl
-	 		        url: 'http://imgur.com/1i2T4xS'
-	 		    }, function (response) {
-	 
-	 		        if (!response || response.error) {
-	 		            console.log(response);
-	 		        } else {
-	 		            $('#success_notice_fb').fadeIn();
-	 		        }
-	 		    }); 
-	    		$.post('/uploadtofb',{token:access_token, name:user_name},function(result){
-					$('#success_notice').show();
-				});
-		    }
-	    	*/	
-	    	$('#fbmessage button').click(function(){
-	    		$.post('/uploadtofb',{token:access_token, name:user_name, message:$('#fbmessage input').val()},function(result){
-					$('#fbmessage').hide()
-					$('#success_notice_fb').fadeIn();
-				});
-	    	});	
- 		     
+			/*
+			   function upload(){
+			   FB.api('/me/photos', 'post', {
+			   message: user_name+' is a Loser',
+//url: photourl
+url: 'http://imgur.com/1i2T4xS'
+}, function (response) {
+
+if (!response || response.error) {
+console.log(response);
+} else {
+$('#success_notice_fb').fadeIn();
+}
+}); 
+$.post('/uploadtofb',{token:access_token, name:user_name},function(result){
+$('#success_notice').show();
+});
+}
+*/	
+$('#fbmessage button').click(function(){
+	$.post('/uploadtofb',{token:access_token, name:user_name, message:$('#fbmessage input').val()},function(result){
+		$('#fbmessage').hide()
+		//$('#success_notice_fb').fadeIn();
+		$('#success_notice_fb').dialog({
+			height: 500,	//doesn't work!??
+			modal: true,
+			buttons: {
+				Ok: function() {
+					$( this ).dialog( "close" );
+				}
+			}
 		});
-	}, {scope: 'publish_actions'});    
+	});
+});	
+
+});
+}, {scope: 'publish_actions'});    
 }
 
 function checkLoginState() {				//call by the button "login Fb and upload img" 
 	FB.getLoginStatus(function(response) {
-	    statusChangeCallback(response);		//upload img to fb
+		statusChangeCallback(response);		//upload img to fb
 	});
 
 }
@@ -88,7 +100,18 @@ function makeqrcode(){							//Call by the button "QRcode and download img"
 	$.get('/makeqrcode',function(data){
 		$('#qrcode').attr('src','makeqrcode');
 		//console.log(data);
-		$('#success_notice_qrcode').fadeIn();	//display QRcode and the close button
+		//$('#success_notice_qrcode').fadeIn();	//display QRcode and the close button
+		$( "#success_notice_qrcode" ).dialog({
+			height: 500,	//doesn't work!??
+			modal: true,
+			buttons: {
+				Ok: function() {
+					$( this ).dialog( "close" );
+				}
+			}
+		});
 	});
 }
+
+
 

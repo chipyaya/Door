@@ -1,30 +1,27 @@
 extends layout
 
 block content
-	script(src='/js/q.js')
+	script.
+		var tonext = function(qnum,next,ans){
+			console.log(qnum,next,ans);
+			$.post('/Q/'+ans, {qnum:qnum, ans:ans},function(data){
+				if(qnum == 23)
+					$.get('/uploadtoimgur',function(data){});
+			});
+		}
 	mixin page(Q)
 		div(class="qbg#{Q.qnum}")
-			h1.tlt_q.question Q#{Q.qnum} #{Q.title}
-			if (Q.qnum !== 16)
-				a(onclick="tonext('#{Q.Anext}')")#A.button_c &#9758; #{Q.ansA}
-				a(onclick="tonext('#{Q.Bnext}')")#B.button_c &#9758; #{Q.ansB}
-				a(onclick="tonext('#{Q.Cnext}')")#C.button_c &#9758; #{Q.ansC}
+			.ques
+				h1.tlt_q.question Q#{Q.qnum} #{Q.title}
+				a.button_c(onclick="tonext('#{Q.qnum}','#{Q.Anext}',1)") #{Q.ansA}
+				a.button_c(onclick="tonext('#{Q.qnum}','#{Q.Bnext}',2)") #{Q.ansB}
+				a.button_c(onclick="tonext('#{Q.qnum}','#{Q.Cnext}',3)") #{Q.ansC}
 				if Q.ansD != null
-					a(onclick="tonext('#{Q.Dnext}')")#D.button_c &#9758; #{Q.ansD}
+					a.button_c(onclick="tonext('#{Q.qnum}','#{Q.Dnext}',4)")#D #{Q.ansD}
 				if Q.ansE != null
-					a(onclick="tonext('#{Q.Enext}')")#E.button_c &#9758; #{Q.ansE}
+					a.button_c(onclick="tonext('#{Q.qnum}','#{Q.Enext}',5)")#E #{Q.ansE}
 				if Q.ansF != null
-					a(onclick="tonext('#{Q.Fnext}')")#F.button_c &#9758; #{Q.ansF}
-			else
-				a(onclick="uploadtoimgur()")#A.button_c &#9758; #{Q.ansA}
-				a(onclick="uploadtoimgur()")#B.button_c &#9758; #{Q.ansB}
-				a(onclick="uploadtoimgur()")#C.button_c &#9758; #{Q.ansC}
-				if Q.ansD != null
-					a(onclick="uploadtoimgur()")#D.button_c &#9758; #{Q.ansD}
-				if Q.ansE != null
-					a(onclick="uploadtoimgur()")#E.button_c &#9758; #{Q.ansE}
-				if Q.ansF != null
-					a(onclick="uploadtoimgur()")#F.button_c &#9758; #{Q.ansF}
+					a.button_c(onclick="tonext('#{Q.qnum}','#{Q.Fnext}',6)")#F #{Q.ansF}
 			
 	.content
 		+page({qnum:1, title:"哈囉哈，你是大學生嗎？", ansA: "是", ansB: "否", ansC: "我認為此題與溫魯無關", Anext:2, Bnext:2, Cnext:2})
@@ -50,77 +47,11 @@ block content
 		+page({qnum:21, title:"你覺得自己外表好看嗎?", ansA: "好看", ansB: "不好看", ansC: "我認為此題與溫魯無關", Anext:22, Bnext:22, Cnext:22})
 		+page({qnum:22, title:"請問你有信心回答這個知識性問題嗎? ∫(1+e^2x)dx=?", ansA: "有", ansB: "沒有", ansC: "我認為此題與溫魯無關", Anext:23, Bnext:23, Cnext:23})
 		+page({qnum:23, title:"你覺得自己現在是魯蛇還溫拿呢?", ansA: "魯蛇", ansB: "溫拿", ansC: "我認為此題與溫魯無關"})
-		.container
-			.nav
-				ul
-					li(style="background-color:#46dd46")
-					li
-					li
-					li
-					li
-					li
-					li
-					li
-					li
-					li
-					li
-					li
-					li
-					li
-					li
-					li
-					li
 
-		//-.q
-			img.qbg1(src="/img/web_bg/web_div1.jpg")
-			img.qbg2(src="/img/web_bg/web_div1.jpg")
-			img.qbg3(src="/img/web_bg/web_div1.jpg")
-			img.qbg4(src="/img/web_bg/web_div1.jpg")
-			img.qbg5(src="/img/web_bg/web_div2.jpg")
-			img.qbg6(src="/img/web_bg/web_div3.jpg")
-			img.qbg7(src="/img/web_bg/web_div4.jpg")
-			img.qbg8(src="/img/web_bg/web_div5.jpg")
-			img.qbg9(src="/img/web_bg/web_div5.jpg")
-			img.qbg10(src="/img/web_bg/web_div5.jpg")
-			img.qbg11(src="/img/web_bg/web_div5.jpg")
-			img.qbg12(src="/img/web_bg/web_div5.jpg")
-			img.qbg13(src="/img/web_bg/web_div6.jpg")
-			img.qbg14(src="/img/web_bg/web_div1.jpg")
-			img.qbg15(src="/img/web_bg/web_div1.jpg")
-			img.qbg16(src="/img/web_bg/web_div1.jpg")
-			img.qbg17(src="/img/web_bg/web_div1.jpg")
-			img.qbg18(src="/img/web_bg/web_div1.jpg")
-			//display after pressing the button in Q14 (implement in uploadtoimgur()
-			//-#loading.text-center
-				#fountainTextG
-						.fountainTextG#fountainTextG_1 L
-						.fountainTextG#fountainTextG_2 o
-						.fountainTextG#fountainTextG_3 a
-						.fountainTextG#fountainTextG_4 d
-						.fountainTextG#fountainTextG_5 i
-						.fountainTextG#fountainTextG_6 n
-						.fountainTextG#fountainTextG_7 g
-			// for animation of text
 	script(src='/js/jquery.lettering.js')
 	script(src='/js/jquery.fittext.js')
 	script(src='/js/jquery.textillate.js')
 	script(src='/js/tlt.js')
-	
 	script(src='/js/sharephoto.js')
-
-	//-script#qtemplate(type="text/template")
-		.ques_choice
-			h1.tlt_q.question
-			if (Q.qnum !== 14)
-				a(href="#{Q.Anext}")#A.button_c &#9758; #{Q.ansA}
-				a(href="#{Q.Bnext}")#B.button_c &#9758; #{Q.ansB}
-			else
-				a(onclick="uploadtoimgur()")#A.button_c &#9758; #{Q.ansA}
-				a(onclick="uploadtoimgur()")#B.button_c &#9758; #{Q.ansB}
-			if (typeof(Q.ansC) !== 'undefined')
-				a(href="#{Q.Cnext}")#C.button_c &#9758; #{Q.ansC}
-			if (typeof(Q.ansD) !== 'undefined')
-				a(href="#{Q.Dnext}")#D.button_c &#9758; #{Q.ansD}
-			if (typeof(Q.ansE) !== 'undefined')
-				a(href="#{Q.Enext}")#E.button_c &#9758; #{Q.ansE}
+	script(src='/js/q.js')
 

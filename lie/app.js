@@ -43,8 +43,7 @@ app.get('/questions', function(req, res){
 	res.render('questions');
 });
 
-app.get('/Q/:qnum', function(req, res){
-
+app.post('/Q/:qnum', function(req, res){
 	// Read pulse number from pulse.txt
 	fs.readFile('pulse.txt', 'utf8', function(err,data){
 		if (err) throw err;
@@ -92,11 +91,6 @@ app.get('/makeqrcode', function(req,res){		//call by pressing the button in shar
 	qrcode.pipe(res);
 });
 
-
-//unused?
-app.post('/A', function(req, res){
-	console.log('req.body.ans',req.body.ans);
-})
 
 app.post('/uploadtofb', function(req, res){		//call by sharephoto.js
 

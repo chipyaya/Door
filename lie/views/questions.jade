@@ -6,7 +6,7 @@ block content
 			console.log(qnum,next,ans);
 			$.post('/Q/'+ans, {qnum:qnum, ans:ans},function(data){
 				if(qnum == 23)
-					$.get('/uploadtoimgur',function(data){});
+					window.location='/loading';
 			});
 		}
 	mixin page(Q)

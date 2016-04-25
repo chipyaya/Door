@@ -109,7 +109,7 @@ app.post('/uploadtofb', function(req, res){		//call by sharephoto.js
 	var ACCESS_TOKEN =token;
 
 	var form = new FormData(); //Create multipart form
-	form.append('file', fs.createReadStream('public/img/bg.png')); //Put file
+	form.append('file', fs.createReadStream('public/img/composite.png')); //Put file
 	form.append('message', message); //Put message
 
 	var options = {

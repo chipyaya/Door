@@ -1,5 +1,13 @@
 body{
 	background-color: black;
+	background-image: url(/img/web_bg/web_index.jpg);
+	background-size: cover;
+	height: 100vh;
+}
+
+#start{
+	font-size: 40px;
+	
 }
 
 h1.question{
@@ -9,6 +17,7 @@ h1.question{
 	text-shadow:none;
 	line-height:60px;
 }
+
 
 .qbg1, .qbg2, .qbg3, .qbg4, .qbg5, .qbg6, .qbg7, .qbg8, .qbg9, .qbg10, .qbg11, .qbg12, .qbg13, .qbg14, .qbg15, .qbg16, .qbg17, .qbg18, .qbg19, .qbg20, .qbg21, .qbg22, .qbg23{
 	background-size: cover;

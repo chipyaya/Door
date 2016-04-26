@@ -46,34 +46,18 @@ h1.question{
 	width:70%;
 	padding: 10% 10% 0 10%;
 }
-a.button_c, a.button_start {
-	border-radius: 20px;
-	font-family: Consolas, monaco, monospace;
-	text-align: left;
-	text-decoration: none;
-	display: inline-block;
-	font-size: 30px;
-	margin: 30px 10px;
-	padding: 15px 25px;
-	cursor: pointer;
-}
 
-a.button_start{
-	border: 2px solid white;
-	color:white;
-}
-
-.qbg1 h1, .qbg2 h1, .qbg3 h1, .qbg4 h1, .qbg5 h1, .qbg16 h1, .qbg17 h1, .qbg18 h1, .qbg19 h1, .qbg20 h1, .qbg21 h1, .qbg22 h1, .qbg23 h1{
+.qbg1 h1, .qbg2 h1, .qbg3 h1, .qbg4 h1, .qbg5 h1, .qbg7 h1, .qbg16 h1, .qbg17 h1, .qbg18 h1, .qbg19 h1, .qbg20 h1, .qbg21 h1, .qbg22 h1, .qbg23 h1{
 	color:white;
 }
 .qbg6 h1, .qbg8 h1, .qbg9 h1, .qbg10 h1, .qbg11 h1, .qbg12 h1, .qbg13 h1, .qbg14 h1, .qbg15 h1{
 	color:black;
 }
-.qbg1 .button_c, .qbg2 .button_c, .qbg3 .button_c, .qbg4 .button_c, .qbg5 .button_c, .qbg7 .button_c, .qbg16 .button_c, .qbg17 .button_c, .qbg18 .button_c, .qbg19 .button_c, .qbg20 .button_c, .qbg21 .button_c, .qbg22 .button_c, .qbg23 .button_c{
+.qbg1 .button, .qbg2 .button, .qbg3 .button, .qbg4 .button, .qbg5 .button, .qbg7 .button, .qbg16 .button, .qbg17 .button, .qbg18 .button, .qbg19 .button, .qbg20 .button, .qbg21 .button, .qbg22 .button, .qbg23 .button{
 	border: 2px solid white;
 	color:white;
 }
-.qbg6 .button_c, .qbg8 .button_c, .qbg9 .button_c, .qbg10 .button_c, .qbg11 .button_c, .qbg12 .button_c, .qbg13 .button_c, .qbg14 .button_c, .qbg15 .button_c{
+.qbg6 .button, .qbg8 .button, .qbg9 .button, .qbg10 .button, .qbg11 .button, .qbg12 .button, .qbg13 .button, .qbg14 .button, .qbg15 .button{
 	border: 2px solid black;
 	color:black;
 }

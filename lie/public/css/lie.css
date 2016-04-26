@@ -1,13 +1,24 @@
 body{
 	background-color: black;
+}
+
+.index_bg{
+	height: 100vh;
 	background-image: url(/img/web_bg/web_index.jpg);
 	background-size: cover;
-	height: 100vh;
 }
 
 #start{
+	z-index: 100;
+	position: absolute;
 	font-size: 40px;
-	
+	font-size: 4vh;
+	top: 65vh;
+	left: 60vh;
+}
+
+p{
+	color: white;
 }
 
 h1.question{
@@ -71,40 +82,5 @@ h1.question{
 	color:black;
 }
 
-p{
-	color: white;
-}
-
-#intro{
-	height:850px;
-	border-style: solid;
-}
-
-#intro div{
-	margin-top:50px;
-}
-
-#intro p{
-	font-size:25px;
-	line-height: 80px;
-	margin-left:50px;
-}
 
 
-#loading{
-	display:none;
-}
-
-.block{
-	border-radius:25px; 
-	border-style: solid;
-	margin: 70px 10px;
-	height: 750px;
-}
-
-.caution{
-	color: white;
-	font-family: Consolas, monaco, monospace;
-	font-size: 35px;
-	margin: 30px 5px;
-}

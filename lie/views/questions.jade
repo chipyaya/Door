@@ -4,11 +4,14 @@ block content
 	script.
 		var recordans = function(qnum,next,ans){
 			console.log(qnum,next,ans);
-			$("html, body").animate({"scrollTop": $(".qbg"+next).offset().top});
-			tlt();
+			if(qnum != 23) {
+				$("html, body").animate({"scrollTop": $(".qbg"+next).offset().top});
+				tlt();
+			}
 			$.post('/Q', {qnum:qnum, ans:ans},function(data){
-				if(qnum == 23)
+				if(qnum == 23) {
 					window.location='/loading';
+				}
 			});
 		}
 	mixin page(Q)

@@ -4,24 +4,29 @@ block content
 	script.
 		var recordans = function(qnum,next,ans){
 			console.log(qnum,next,ans);
+			if(qnum != 23) {
+				$("html, body").animate({"scrollTop": $(".qbg"+next).offset().top});
+				tlt();
+			}
 			$.post('/Q', {qnum:qnum, ans:ans},function(data){
-				if(qnum == 23)
+				if(qnum == 23) {
 					window.location='/loading';
+				}
 			});
 		}
 	mixin page(Q)
 		div(class="qbg#{Q.qnum}")
 			.ques
 				h1.tlt_q.question Q#{Q.qnum} #{Q.title}
-				a.button_c(onclick="recordans('#{Q.qnum}','#{Q.Anext}',1)") #{Q.ansA}
-				a.button_c(onclick="recordans('#{Q.qnum}','#{Q.Bnext}',2)") #{Q.ansB}
-				a.button_c(onclick="recordans('#{Q.qnum}','#{Q.Cnext}',3)") #{Q.ansC}
+				a.button(onclick="recordans('#{Q.qnum}','#{Q.Anext}',1)") #{Q.ansA}
+				a.button(onclick="recordans('#{Q.qnum}','#{Q.Bnext}',2)") #{Q.ansB}
+				a.button(onclick="recordans('#{Q.qnum}','#{Q.Cnext}',3)") #{Q.ansC}
 				if Q.ansD != null
-					a.button_c(onclick="recordans('#{Q.qnum}','#{Q.Dnext}',4)")#D #{Q.ansD}
+					a.button(onclick="recordans('#{Q.qnum}','#{Q.Dnext}',4)")#D #{Q.ansD}
 				if Q.ansE != null
-					a.button_c(onclick="recordans('#{Q.qnum}','#{Q.Enext}',5)")#E #{Q.ansE}
+					a.button(onclick="recordans('#{Q.qnum}','#{Q.Enext}',5)")#E #{Q.ansE}
 				if Q.ansF != null
-					a.button_c(onclick="recordans('#{Q.qnum}','#{Q.Fnext}',6)")#F #{Q.ansF}
+					a.button(onclick="recordans('#{Q.qnum}','#{Q.Fnext}',6)")#F #{Q.ansF}
 			
 	.content
 		+page({qnum:1, title:"哈囉哈，你是大學生嗎？", ansA: "是", ansB: "否", ansC: "我認為此題與溫魯無關", Anext:2, Bnext:2, Cnext:2})
@@ -53,5 +58,4 @@ block content
 	script(src='/js/jquery.textillate.js')
 	script(src='/js/tlt.js')
 	script(src='/js/sharephoto.js')
-	script(src='/js/q.js')
 

@@ -1,24 +1,21 @@
 extends layout
 
 block content
-	script(src='/js/sharephoto.js')
-	img#sharebg(src='/img/web_bg/share_bg.jpg' alt="sharebg")
-	img#composite(src='/img/composite.png' alt="composite")
-	.leftoption
-		a(href="#" onclick="checkLoginState()").button Fb登入並上傳照片
+	link(rel='stylesheet', href='/css/share.css')
+	.imgs
+		img#sharebg(src='/img/web_bg/share_bg.jpg' alt="sharebg")
+		img#composite(src='/img/composite.png' alt="composite")
+	.sharebtns
+		a.button(href="#" onclick="checkLoginState()") Fb登入並上傳照片
 		#fbmessage
 			input(type='textarea' placeholder='請輸入照片說明文字...')
 			button 確定
 		#success_notice_fb
 			span 上傳成功! 快去Facebook看看吧!
-			br
 			.button 關閉
-		br
-		a(href="#" onclick="makeqrcode()").button QR-code下載照片
+		a.button(href="#" onclick="makeqrcode()") QR-code下載照片
 		#success_notice_qrcode(title="QRcode of your picture")
-				img#qrcode(width='100',height='100')
-			br
-		br
-		a(href="#" onclick="restart()").button 結束
-		
+			img#qrcode(width='100',height='100')
+		a.button.end(href="#" onclick="restart()") 結束
+	script(src='/js/sharephoto.js')
 	script(src='/js/button.js')

@@ -27,34 +27,37 @@ function statusChangeCallback(response) {
 			var user_name = response.name;
 			var user_id = response.id;
 
-			//$('#fbmessage').fadeIn();
+			$('#fbmessage').fadeIn();
+			/*
 			$( "#fbmessage" ).dialog({
 				modal: true,
 			});
+			*/
 
 			/*
-			   function upload(){
+			function upload(){
 			   FB.api('/me/photos', 'post', {
 			   message: user_name+' is a Loser',
-//url: photourl
-url: 'http://imgur.com/1i2T4xS'
-}, function (response) {
+				//url: photourl
+				url: 'http://imgur.com/1i2T4xS'
+				}, function (response) {
 
-if (!response || response.error) {
-console.log(response);
-} else {
-$('#success_notice_fb').fadeIn();
-}
-}); 
-$.post('/uploadtofb',{token:access_token, name:user_name},function(result){
-$('#success_notice').show();
-});
-}
-*/	
+					if (!response || response.error) {
+						console.log(response);
+					} else {
+						$('#success_notice_fb').fadeIn();
+					}
+				}); 
+				$.post('/uploadtofb',{token:access_token, name:user_name},function(result){
+					$('#success_notice').show();
+				});
+			}
+				*/	
 $('#fbmessage button').click(function(){
 	$.post('/uploadtofb',{token:access_token, name:user_name, message:$('#fbmessage input').val()},function(result){
 		$('#fbmessage').hide()
-		//$('#success_notice_fb').fadeIn();
+		$('#success_notice_fb').fadeIn();
+		/*
 		$('#success_notice_fb').dialog({
 			height: 500,	//doesn't work!??
 			modal: true,
@@ -64,6 +67,7 @@ $('#fbmessage button').click(function(){
 				}
 			}
 		});
+		*/
 	});
 });	
 
@@ -100,7 +104,8 @@ function makeqrcode(){							//Call by the button "QRcode and download img"
 	$.get('/makeqrcode',function(data){
 		$('#qrcode').attr('src','makeqrcode');
 		//console.log(data);
-		//$('#success_notice_qrcode').fadeIn();	//display QRcode and the close button
+		$('#success_notice_qrcode').fadeIn();	//display QRcode and the close button
+		/*
 		$( "#success_notice_qrcode" ).dialog({
 			height: 500,	//doesn't work!??
 			modal: true,
@@ -110,6 +115,7 @@ function makeqrcode(){							//Call by the button "QRcode and download img"
 				}
 			}
 		});
+		*/
 	});
 }
 

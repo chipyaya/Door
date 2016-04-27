@@ -60,7 +60,6 @@ a.end{
 #success_notice_qrcode, #success_notice_fb{
 	color: white;
 	display:none;
-	position:absolute;
 }
 
 #success_notice_fb p{
@@ -86,17 +85,13 @@ a.end{
 
 
 #whitebg{
-	position: relative;
-	margin: auto;
-	width: 200px;
-	height: 140px;
+	width: 80%;
 	background-color: white;
-	margin: auto;
-	border: 3px solid #FBBC15;
+	margin: 20px auto;
+	display:none;
 }
 
-#qrcode{
-	margin: 20px 50px;
-	width: 100px;
-	height: 100px;
+.qrcode{
+	width: 80%;
+	padding:10px;
 }

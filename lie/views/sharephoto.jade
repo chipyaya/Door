@@ -8,14 +8,12 @@ block content
 	.sharebtns
 		a.button(href="#" onclick="checkLoginState()") Fb登入並上傳照片
 		#fbmessage(title='Say something~')
-			br
 			input(type='textarea' placeholder='請輸入照片說明文字...')
 		#success_notice_fb(title="Upload success!")
 			p 成功！快去fb看看吧~
-		a.button(href="#" onclick="makeqrcode()") QR-code下載照片
-		#success_notice_qrcode
+		a.button.qrcodebutton(href="#" onclick="makeqrcode()") QR-code下載照片
 			#whitebg
-				img#qrcode
+				img.qrcode
 		a.button.end(href="#" onclick="restart()") 結束
 	script(src='/js/sharephoto.js')
 	script(src='/js/button.js')

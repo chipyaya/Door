@@ -91,8 +91,9 @@ function uploadtoimgur(){
 
 function makeqrcode(){							//Call by the button "QRcode and download img"
 	$.get('/makeqrcode',function(data){
-		$('#qrcode').attr('src','makeqrcode');
-		$('#success_notice_qrcode').fadeIn();	//display QRcode and the close button
+		$('.qrcode').attr('src','makeqrcode');
+		$('a.qrcodebutton').animate({height:200},1000);
+		$('#whitebg').show();
 	});
 }
 

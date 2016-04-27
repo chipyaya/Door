@@ -44,8 +44,8 @@ app.get('/questions', function(req, res){
 });
 
 app.post('/Q', function(req, res){
-	// Read pulse number from pulse.txt
 	console.log(req.body.qnum, req.body.ans);
+	// Read pulse number from pulse.txt
 	fs.readFile('pulse.txt', 'utf8', function(err,data){
 		if (err) throw err;
 		//recode time and pulse number per question

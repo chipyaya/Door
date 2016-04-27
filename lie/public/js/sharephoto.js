@@ -27,12 +27,14 @@ function statusChangeCallback(response) {
 			var user_name = response.name;
 			var user_id = response.id;
 
-			$('#fbmessage').fadeIn();
-			/*
 			$( "#fbmessage" ).dialog({
 				modal: true,
+				buttons: {
+					Ok: function() {
+						$( this ).dialog( "close" );
+					}
+				}
 			});
-			*/
 
 			/*
 			function upload(){
@@ -53,12 +55,11 @@ function statusChangeCallback(response) {
 				});
 			}
 				*/	
-$('#fbmessage button').click(function(){
-	$.post('/uploadtofb',{token:access_token, name:user_name, message:$('#fbmessage input').val()},function(result){
+		$('#fbmessage button').click(function(){
+			$.post('/uploadtofb',{token:access_token, name:user_name, message:$('#fbmessage input').val()},function(result){
 		$('#fbmessage').hide()
 		$('#success_notice_fb').fadeIn();
-		/*
-		$('#success_notice_fb').dialog({
+		/*$('#success_notice_fb').dialog({
 			height: 500,	//doesn't work!??
 			modal: true,
 			buttons: {
@@ -66,8 +67,7 @@ $('#fbmessage button').click(function(){
 					$( this ).dialog( "close" );
 				}
 			}
-		});
-		*/
+		});*/
 	});
 });	
 
@@ -103,19 +103,7 @@ function uploadtoimgur(){
 function makeqrcode(){							//Call by the button "QRcode and download img"
 	$.get('/makeqrcode',function(data){
 		$('#qrcode').attr('src','makeqrcode');
-		//console.log(data);
 		$('#success_notice_qrcode').fadeIn();	//display QRcode and the close button
-		/*
-		$( "#success_notice_qrcode" ).dialog({
-			height: 500,	//doesn't work!??
-			modal: true,
-			buttons: {
-				Ok: function() {
-					$( this ).dialog( "close" );
-				}
-			}
-		});
-		*/
 	});
 }
 

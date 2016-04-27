@@ -7,16 +7,15 @@ block content
 		img#composite(src='/img/composite.png' alt="composite")
 	.sharebtns
 		a.button(href="#" onclick="checkLoginState()") Fb登入並上傳照片
-		#fbmessage
+		#fbmessage(title='說說話吧~')
+			br
 			input(type='textarea' placeholder='請輸入照片說明文字...')
-			button 確定
-		#success_notice_fb
+		#success_notice_fb(title="Success!")
 			span 上傳成功! 快去Facebook看看吧!
-			.button 關閉
 		a.button(href="#" onclick="makeqrcode()") QR-code下載照片
-		#success_notice_qrcode(title="QRcode of your picture")
+		#success_notice_qrcode
 			#whitebg
-				img#qrcode(width='100',height='100')
+				img#qrcode
 		a.button.end(href="#" onclick="restart()") 結束
 	script(src='/js/sharephoto.js')
 	script(src='/js/button.js')

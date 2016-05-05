@@ -111,4 +111,8 @@ router.post('/uploadtofb', function(req, res){		//call by sharephoto.js
 	res.end();
 })
 
+router.get('/tv', function(req, res){
+	res.render('tv');
+})
+
 module.exports = router;

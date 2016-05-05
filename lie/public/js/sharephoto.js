@@ -16,12 +16,12 @@ window.fbAsyncInit = function(){
 }(document, 'script', 'facebook-jssdk'));
 
 var photourl="";
-
+var access_token=""
 function statusChangeCallback(response) {
 
 	FB.login(function(response) {
 
-		var access_token = response.authResponse.accessToken;
+		access_token = response.authResponse.accessToken;
 
 		FB.api('/me', function(response) {
 			var user_name = response.name;
@@ -68,13 +68,16 @@ function checkLoginState() {				//call by the button "login Fb and upload img"
 }
 
 
-function restart(){                         //call by the button "END"
-	FB.logout(function(response) {});       //logout FB account
-	window.location.replace('/');           //Go back to / 
+function restart(){  
+	if(access_token != "")                       //call by the button "END"
+		FB.logout(function(response) {});       //logout FB account
+	$.get('/clean',function(data){
+		window.location.href='/';
+	});
 }
 
 
-function uploadtofb(){						//unused?
+function uploadtofb(){
 	checkLoginState();
 }
 

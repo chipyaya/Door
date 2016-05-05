@@ -132,6 +132,12 @@ app.get('/tv', function(req, res){
 	res.render('tv');
 })
 
+app.post('/ratio', function(req, res){
+	fs.readFile('ratio.txt', 'utf8', function(err,data){
+		parseInt(data);
+	})
+})
+
 app.listen(3000, function () {
 	console.log('Example app listening on port 3000!');
 });

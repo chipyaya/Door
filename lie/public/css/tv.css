@@ -17,6 +17,9 @@
 	text-align: center;
 	
 }
+#left_title p {
+	display: inline;
+}
 #pie{
 	height: 80%;
 	width: 60%; 

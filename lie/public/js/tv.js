@@ -1,4 +1,4 @@
-$(function () {
+function draw() {
 	$('#pie').highcharts({
 		chart: {
 			plotBackgroundColor: null,
@@ -45,7 +45,12 @@ $(function () {
 	});
 });
 
+$.post('/ratio', function(data){
+    //display content using a basic HTML replacement
+	var win = document.getElementById('win_ratio'); 
+	win.innerHTML = data; //display output in DOM
+	var loo = document.getElementById('loo_ratio'); 
+	loo.innerHTML = '123'; //display output in DOM
 
-$(function () {
-	//get ratio from ratio.txt
 });
+t

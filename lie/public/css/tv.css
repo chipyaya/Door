@@ -1,0 +1,24 @@
+#tv_container {
+	height: 100vh;
+}
+#title{
+	text-align: center;
+	float: center;
+	font-size: 60px;
+	height: 20%;
+}
+#left_title{
+	height: 80%;
+	width: 40%; 
+	z-index: 3;
+	position: absolute;
+	font-size: 50px;
+	font-family: Consolas, monaco, monospace;
+	text-align: center;
+	
+}
+#pie{
+	height: 80%;
+	width: 60%; 
+	float: right;
+}

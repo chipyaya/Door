@@ -27,31 +27,16 @@ function statusChangeCallback(response) {
 			var user_name = response.name;
 			var user_id = response.id;
 
-			//write sth msg
-			$( "#fbmessage" ).dialog({
-				resizable: false,
-				modal: true,
-				buttons: {
-					Ok: function() {
-						$( this ).dialog( "close" );
-						console.log('hi');
-						$.post('/uploadtofb',{token:access_token, name:user_name, message:$('#fbmessage input').val()},function(result){
-							$('#fbmessage').hide()
-
-							//success msg
-							$('#success_notice_fb').dialog({
-								resizable: false,
-								modal: true,
-								buttons: {
-									Ok: function() {
-										$( this ).dialog( "close" );
-									}
-								}
-							});
-
-						});
-					}
-				}
+			$('#fbmessage').fadeIn();
+			$('#fbmessage a').click(function(){	
+				$.post('/uploadtofb',{token:access_token, message:$('#fbmessage input').val()},function(result){
+					$('#fbmessage').hide();
+					$('#fbmessage input').val("");
+					$('.sharebtns a.button:nth-child(1)').text('上傳成功!');
+					$('.sharebtns a.button:nth-child(1)').attr('onclick',"");
+					$('.sharebtns a.button:nth-child(1)').css('color','gray');
+					$('.sharebtns a.button:nth-child(1)').css('border-color','gray');
+				});
 			});
 
 		});
@@ -99,6 +84,7 @@ function makeqrcode(){							//Call by the button "QRcode and download img"
 		$('#whitebg').show();
 	});
 }
+
 
 
 

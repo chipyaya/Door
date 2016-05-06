@@ -5,15 +5,14 @@ block content
 	div
 		img#sharebg(src='/img/web_bg/share_bg.jpg' alt="sharebg")
 		img#composite(src='/img/composite.png' alt="composite")
+	#fbmessage
+		input(type='textarea' placeholder='輸入照片敘述...')
+		a 確定
 	.sharebtns
-		a.button(href="#" onclick="checkLoginState()") Fb登入並上傳照片
-		#fbmessage(title='Say something~')
-			input(type='textarea' placeholder='請輸入照片說明文字...')
-		#success_notice_fb(title="Upload success!")
-			p 成功！快去fb看看吧~
-		a.button.qrcodebutton(href="#" onclick="makeqrcode()") QR-code下載照片
+		a.button(href="javascript:;" onclick="checkLoginState()") Fb登入並上傳照片
+		a.button.qrcodebutton(href="javascript:;" onclick="makeqrcode()") QR-code下載照片
 			#whitebg
 				img.qrcode
-		a.button.end(href="#" onclick="restart()") 結束
+		a.button.end(href="javascript:;" onclick="restart()") 結束
 	script(src='/js/sharephoto.js')
 	script(src='/js/button.js')

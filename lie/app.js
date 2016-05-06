@@ -4,7 +4,7 @@ var https = require('https');
 var bodyParser = require('body-parser');
 var imgur = require('imgur');
 var routes = require('./routes/photo');
-
+var tvroute = require('./routes/tv');
 var app = express();
 
 app.set('views', path.join(__dirname, 'views'));
@@ -14,6 +14,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
+app.use('/', tvroute);
 
 imgur.setCredentials('anndad1993@yahoo.com.tw', 'loodoor12345', '2e501adb452625d');
 

@@ -48,11 +48,8 @@ router.post('/Q', function(req, res){
 router.get('/loading', function(req,res){
 	res.render('loading');
 });
-
 router.get('/uploadtoimgur', function(req, res){		//call by pressing the button in question.jade
-	console.log('timerecord',cal.timerecord);
 	var level = cal.cal(cal.qs,cal.ans,cal.timerecord,cal.pulse);	//depends on %
-	console.log('level',level);
 	var centerX = 100;
 	var centerY = 100;
 	var shoulderW = 400;
@@ -86,11 +83,8 @@ router.get('/makeqrcode', function(req,res){		//call by pressing the button in s
 
 router.post('/uploadtofb', function(req, res){		//call by sharephoto.js
 
-	var token = req.body.token;
-	var name = req.body.name;
+	var ACCESS_TOKEN = req.body.token;
 	var message = req.body.message;
-	
-	var ACCESS_TOKEN =token;
 
 	var form = new FormData(); //Create multipart form
 	form.append('file', fs.createReadStream('public/img/composite.png')); //Put file
@@ -100,7 +94,7 @@ router.post('/uploadtofb', function(req, res){		//call by sharephoto.js
 	    method: 'post',
 	    host: 'graph.facebook.com',
 	    path: '/me/photos?access_token='+ACCESS_TOKEN,
-	    headers: form.getHeaders(),
+	    headers: form.getHeaders()
 	}
 	 
 	var request = https.request(options, function (res){

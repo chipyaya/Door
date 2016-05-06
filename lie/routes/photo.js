@@ -24,6 +24,10 @@ router.get('/clean', function(req, res){
 })
 
 router.get('/questions', function(req, res){
+	cal.qs = [];
+	cal.ans = [];
+	cal.timerecord = [];
+	cal.pulse = [];
 	var d = new Date();
 	cal.timerecord.push(d.getTime());
 	res.render('questions');
@@ -40,6 +44,7 @@ router.post('/Q', function(req, res){
 		cal.ans.push(req.body.ans);
 		cal.timerecord.push(d.getTime());
 		cal.pulse.push(parseInt(data));
+		console.log(cal.timerecord);
 	});
 
 	res.end();

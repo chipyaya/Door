@@ -17,13 +17,6 @@ app.use('/', routes);
 
 imgur.setCredentials('anndad1993@yahoo.com.tw', 'loodoor12345', '2e501adb452625d');
 
-
-app.post('/ratio', function(req, res){
-	fs.readFile('ratio.txt', 'utf8', function(err,data){
-		parseInt(data);
-	})
-})
-
 app.listen(3000, function () {
 	console.log('Example app listening on port 3000!');
 });

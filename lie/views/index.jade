@@ -5,7 +5,7 @@ block content
 		function detect(){
 			$.get('/detectstart',function(data){
 				if(data.result == 1)
-					window.location='/share';
+					window.location='/questions';
 			});
 		}
 		setInterval(detect, 1000);

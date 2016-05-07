@@ -18,8 +18,13 @@ router.get('/', function(req, res){
 
 var lastpulse;
 
+fs.readFile('hardware/heartBeat/heartBeat.txt', 'utf8', function(err,data){
+	lastpulse = parseInt(data);
+});
+
 router.get('/detectstart', function(req, res){
 	fs.readFile('hardware/heartBeat/heartBeat.txt', 'utf8', function(err,data){
+		console.log(parseInt(data),lastpulse)
 		if(parseInt(data) > lastpulse)
 			res.json({result:1});
 		else
@@ -45,6 +50,7 @@ router.get('/questions', function(req, res){
 	// Read pulserecord number from pulserecord.txt
 	fs.readFile('hardware/heartBeat/heartBeat.txt', 'utf8', function(err,data){
 		cal.pulserecord.push(parseInt(data));
+		fs.close();
 	});
 	res.render('questions');
 });
@@ -61,6 +67,7 @@ router.post('/Q', function(req, res){
 		cal.timerecord.push(d.getTime());
 		cal.pulserecord.push(parseInt(data));
 		console.log(cal.timerecord);
+		fs.close();
 	});
 
 	res.end();
@@ -100,7 +107,8 @@ router.get('/uploadtoimgur', function(req, res){		//call by pressing the button 
 				.catch(function (err) {
 					console.error(err.message);
 				});
-		}); 
+		});
+		fs.close(); 
 	});
 });															// return to sharephoto.js
 

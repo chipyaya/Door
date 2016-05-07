@@ -16,6 +16,17 @@ router.get('/', function(req, res){
 	res.render('index');
 })
 
+var lastpulse;
+
+router.get('/detectstart', function(req, res){
+	fs.readFile('hardware/heartBeat/heartBeat.txt', 'utf8', function(err,data){
+		if(parseInt(data) > lastpulse)
+			res.json({result:1});
+		else
+			res.json({result:0});
+	});
+})
+
 router.get('/clean', function(req, res){
 	cal.qs = [];
 	cal.ans = [];
@@ -64,6 +75,7 @@ router.get('/loading', function(req,res){
 });
 
 router.get('/uploadtoimgur', function(req, res){		//call by pressing the button in question.jade
+	lastpulse = cal.pulserecord[cal.pulserecord.length-1];
 	var level = cal.cal(cal.qs,cal.ans,cal.timerecord,cal.pulserecord);	//depends on %	//depends on %
 	//readFile
 	fs.readFile('kinect_code/coordinate.txt', 'utf8', function(err,data){

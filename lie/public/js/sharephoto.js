@@ -33,9 +33,9 @@ function statusChangeCallback(response) {
 					$('#fbmessage').hide();
 					$('#fbmessage input').val("");
 					$('.sharebtns a.button:nth-child(1)').text('上傳成功!');
+					$('.sharebtns a.button:nth-child(1)').animate({'color':'#feb900'},100);
+					$('.sharebtns a.button:nth-child(1)').animate({'border-color':'#feb900'},100);
 					$('.sharebtns a.button:nth-child(1)').attr('onclick',"");
-					$('.sharebtns a.button:nth-child(1)').css('color','gray');
-					$('.sharebtns a.button:nth-child(1)').css('border-color','gray');
 				});
 			});
 

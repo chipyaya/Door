@@ -1,4 +1,11 @@
-function draw() {
+$.post('/ratio', function(data){
+	var win_ratio = parseInt(data.ratio);
+	draw(win_ratio);
+	display(win_ratio);
+});
+
+function draw(win_ratio) {
+	var loo_ratio = 100 - win_ratio;
 	$('#pie').highcharts({
 		chart: {
 			plotBackgroundColor: null,
@@ -34,23 +41,26 @@ function draw() {
 			data: [{
 				name: 'winner',
 				color: '#A5F0B8',
-				y: 0.1
+				y: win_ratio			//??
 				
 			}, {
 				name: 'loser',
 				color: '#84D1F0',
-				y: 0.9
+				y: loo_ratio			//??
 			}]
 		}]
 	});
-});
+}
 
-$.post('/ratio', function(data){
-    //display content using a basic HTML replacement
+
+function display(win_ratio) {
 	var win = document.getElementById('win_ratio'); 
-	win.innerHTML = data; //display output in DOM
+	win.innerHTML = win_ratio; //display output in DOM
 	var loo = document.getElementById('loo_ratio'); 
-	loo.innerHTML = '123'; //display output in DOM
+	loo.innerHTML = 100-win_ratio; //display output in DOM
+}
 
+/*
+$.post('/ratio', function(win_ratio){
 });
-t
+*/

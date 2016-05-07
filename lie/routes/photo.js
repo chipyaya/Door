@@ -17,6 +17,7 @@ router.get('/', function(req, res){
 })
 
 var lastpulse;
+var photourl;
 
 fs.readFile('hardware/heartBeat/heartBeat.txt', 'utf8', function(err,data){
 	lastpulse = parseInt(data);
@@ -50,7 +51,6 @@ router.get('/questions', function(req, res){
 	// Read pulserecord number from pulserecord.txt
 	fs.readFile('hardware/heartBeat/heartBeat.txt', 'utf8', function(err,data){
 		cal.pulserecord.push(parseInt(data));
-		fs.close();
 	});
 	res.render('questions');
 });
@@ -67,7 +67,6 @@ router.post('/Q', function(req, res){
 		cal.timerecord.push(d.getTime());
 		cal.pulserecord.push(parseInt(data));
 		console.log(cal.timerecord);
-		fs.close();
 	});
 
 	res.end();
@@ -100,15 +99,13 @@ router.get('/uploadtoimgur', function(req, res){		//call by pressing the button 
 			var albumId = 'fGZi1';
 			imgur.uploadFile('public/img/composite.png', albumId)	//upload to imgur
 				.then(function (json) {
-					var photourl = json.data.link
-					console.log(photourl);
+					photourl = json.data.link
 					res.end();
 				})
 				.catch(function (err) {
 					console.error(err.message);
 				});
 		});
-		fs.close(); 
 	});
 });															// return to sharephoto.js
 
@@ -117,7 +114,7 @@ router.get('/share', function(req, res){			//call by pressing the button in ques
 });
 
 router.get('/makeqrcode', function(req,res){		//call by pressing the button in sharephoto.jade
-	var qrcode = qr.image('http://i.imgur.com/96ySytj.png', { type: 'svg' });	
+	var qrcode = qr.image(photourl, { type: 'svg' });	
 	res.type('svg');
 	qrcode.pipe(res);
 });

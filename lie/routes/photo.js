@@ -60,8 +60,6 @@ router.get('/loading', function(req,res){
 });
 router.get('/uploadtoimgur', function(req, res){		//call by pressing the button in question.jade
 	var level = cal.cal(cal.qs,cal.ans,cal.timerecord,cal.pulserecord);	//depends on %	//depends on %
-	level = 1;//OAOAOAOAOOAOAOAOOAOAOAOAOOA
-
 	//readFile
 	fs.readFile('./kinect_code/coordinate.txt', 'utf8', function(err,data){
 		strarr = data.split("\n");

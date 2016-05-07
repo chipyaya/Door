@@ -92,8 +92,11 @@ var cal = function(qs,ans,timerecord,pulserecord){
 	}
 
 	totalscore -= liepanelty(qs,ans,timespend,pulse);
+	if(totalscore > 100)
+		totalscore = 100;
+	var level = 5 - parseInt(totalscore/20);
 
-	return parseInt(totalscore);
+	return level;
 }
 
 module.exports.qs = qs;

@@ -21,8 +21,8 @@ convert ./kinect_code/kinect_test_data/images/${filename}.png \( +clone -thresho
 
 # convert ./kinect_code/kinect_test_data/images/${filename}.png \( +clone -threshold -1 -negate -fill white -draw "circle 974,432 974-444,432 " \) -alpha off -compose copy_opacity -composite ./public/img/person.png
 	
-convert ./public/img/person.png -resize 300% ./public/img/person.png
+# convert ./public/img/person.png -resize 300% ./public/img/person.png
 
 # composite 
-convert ./public/img/win_loo/win_loo_${level}.png ./public/img/person.png -geometry +-280+200 -composite ./public/img/composite.png
+convert ./public/img/win_loo/win_loo_${level}.png ./public/img/person.png -geometry +-290+200 -composite ./public/img/composite.png
 # convert ./public/img/photo_${level}.png ./public/img/person.png -geometry +150+-30 -composite ./public/img/composite.png

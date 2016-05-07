@@ -46,8 +46,8 @@ function statusChangeCallback(response) {
 
 
 function checkLoginState() {				//call by the button "login Fb and upload img" 
-	$.post('/openosk');
 	FB.getLoginStatus(function(response) {
+		$.post('/openosk');
 		statusChangeCallback(response);		//upload img to fb
 	});
 

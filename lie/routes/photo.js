@@ -62,7 +62,7 @@ router.get('/uploadtoimgur', function(req, res){		//call by pressing the button 
 	var level = cal.cal(cal.qs,cal.ans,cal.timerecord,cal.pulserecord);	//depends on %	//depends on %
 	//readFile
 	fs.readFile('./kinect_code/coordinate.txt', 'utf8', function(err,data){
-		strarr = data.split("\n");
+		var strarr = data.split("\n");
 		console.log(strarr);
 		var filename = parseInt(strarr[0]);
 		var centerX = parseInt(strarr[1]);

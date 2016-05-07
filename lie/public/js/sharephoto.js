@@ -29,9 +29,9 @@ function statusChangeCallback(response) {
 
 			$('#fbmessage').fadeIn();
 			$('#fbmessage a').click(function(){	
-				$.post('/uploadtofb',{token:access_token, message:$('#fbmessage input').val()},function(result){
+				$.post('/uploadtofb',{token:access_token, message:$('#fbmessage textarea').val()},function(result){
 					$('#fbmessage').hide();
-					$('#fbmessage input').val("");
+					$('#fbmessage textarea').val("");
 					$('.sharebtns a.button:nth-child(1)').text('上傳成功!');
 					$('.sharebtns a.button:nth-child(1)').animate({'color':'#feb900'},100);
 					$('.sharebtns a.button:nth-child(1)').animate({'border-color':'#feb900'},100);

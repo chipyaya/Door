@@ -20,7 +20,7 @@ router.get('/clean', function(req, res){
 	cal.qs = [];
 	cal.ans = [];
 	cal.timerecord = [];
-	cal.pulse = [];
+	cal.pulserecord = [];
 	res.end();
 })
 
@@ -28,23 +28,27 @@ router.get('/questions', function(req, res){
 	cal.qs = [];
 	cal.ans = [];
 	cal.timerecord = [];
-	cal.pulse = [];
+	cal.pulserecord = [];
 	var d = new Date();
 	cal.timerecord.push(d.getTime());
+	// Read pulserecord number from pulserecord.txt
+	fs.readFile('hardware/heartBeat/heartBeat.txt', 'utf8', function(err,data){
+		cal.pulserecord.push(parseInt(data));
+	});
 	res.render('questions');
 });
 
 router.post('/Q', function(req, res){
 	console.log(req.body.qnum, req.body.ans);
-	// Read pulse number from pulse.txt
+	// Read pulserecord number from pulserecord.txt
 	fs.readFile('hardware/heartBeat/heartBeat.txt', 'utf8', function(err,data){
 		if (err) throw err;
-		//recode time and pulse number per question
+		//recode time and pulserecord number per question
 		var d = new Date();
 		cal.qs.push(req.body.qnum);
 		cal.ans.push(req.body.ans);
 		cal.timerecord.push(d.getTime());
-		cal.pulse.push(parseInt(data));
+		cal.pulserecord.push(parseInt(data));
 		console.log(cal.timerecord);
 	});
 
@@ -55,7 +59,7 @@ router.get('/loading', function(req,res){
 	res.render('loading');
 });
 router.get('/uploadtoimgur', function(req, res){		//call by pressing the button in question.jade
-	var level = cal.cal(cal.qs,cal.ans,cal.timerecord,cal.pulse);	//depends on %
+	var level = cal.cal(cal.qs,cal.ans,cal.timerecord,cal.pulserecord);	//depends on %	//depends on %
 	level = 1;//OAOAOAOAOOAOAOAOOAOAOAOAOOA
 
 	//readFile
@@ -82,25 +86,7 @@ router.get('/uploadtoimgur', function(req, res){		//call by pressing the button 
 					console.error(err.message);
 				});
 		}); 
-	})
-	var centerX = 100;
-	var centerY = 100;
-	var shoulderW = 400;
-	//processing the image
-	exec('./processImg/commands.sh', [level, centerX, centerY, shoulderW], function(err, data){	
-		console.log(err);
-		console.log(data.toString());                       
-		var albumId = 'fGZi1';
-		imgur.uploadFile('public/img/composite.png', albumId)	//upload to imgur
-		    .then(function (json) {
-		    	var photourl = json.data.link
-		    	console.log(photourl);
-				res.end();
-		    })
-		    .catch(function (err) {
-		        console.error(err.message);
-		    });
-	}); 
+	});
 });															// return to sharephoto.js
 
 router.get('/share', function(req, res){			//call by pressing the button in questions.jade

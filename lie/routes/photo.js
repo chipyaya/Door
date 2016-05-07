@@ -9,6 +9,7 @@ var imgur = require('imgur');
 var qr = require('qr-image');
 var FormData = require('form-data');
 var exec = require('child_process').execFile;
+var exec_command = require('child_process').exec;
 var cal = require('../calculate.js');
 
 router.get('/', function(req, res){
@@ -144,6 +145,10 @@ router.post('/ratio', function(req, res){
 		res.json({ ratio: win_ratio});
 	})
 })
+
+router.post('/openosk', function(req, res){
+	exec_command("osk", function(error, stdout, stderr) {});
+});
 
 router.get('/tv', function(req, res){
 	res.render('tv');

@@ -4,6 +4,6 @@ c:\opencv\build\include\opencv2\core\mat.hpp(1965): warning C4819: 檔案含有�
 c:\opencv\build\include\opencv2\core\persistence.hpp : warning C4819: 檔案含有無法在目前字碼頁 (950) 中表示的字元。請以 Unicode 格式儲存檔案以防止資料遺失
 c:\opencv\build\include\opencv2\core\utility.hpp : warning C4819: 檔案含有無法在目前字碼頁 (950) 中表示的字元。請以 Unicode 格式儲存檔案以防止資料遺失
 c:\opencv\build\include\opencv2\core\utility.hpp : warning C4819: 檔案含有無法在目前字碼頁 (950) 中表示的字元。請以 Unicode 格式儲存檔案以防止資料遺失
-e:\github\kinect\ntuaf-recognize\ntuaf-recognize\ntuaf-recognize.cpp(50): warning C4244: '引數': 將 'float' 轉換為 'int'，由於類型不同，可能導致資料遺失
-e:\github\kinect\ntuaf-recognize\ntuaf-recognize\ntuaf-recognize.cpp(287): warning C4244: '=': 將 'time_t' 轉換為 'int'，由於類型不同，可能導致資料遺失
+e:\github\kinect\ntuaf-recognize\ntuaf-recognize\ntuaf-recognize.cpp(113): warning C4244: '引數': 將 'float' 轉換為 'int'，由於類型不同，可能導致資料遺失
+e:\github\kinect\ntuaf-recognize\ntuaf-recognize\ntuaf-recognize.cpp(328): warning C4244: '=': 將 'time_t' 轉換為 'int'，由於類型不同，可能導致資料遺失
   NTUAF-Recognize.vcxproj -> E:\Github\Kinect\NTUAF-Recognize\x64\Debug\NTUAF-Recognize.exe

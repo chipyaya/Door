@@ -24,6 +24,10 @@ router.get('/clean', function(req, res){
 })
 
 router.get('/questions', function(req, res){
+	cal.qs = [];
+	cal.ans = [];
+	cal.timerecord = [];
+	cal.pulse = [];
 	var d = new Date();
 	cal.timerecord.push(d.getTime());
 	res.render('questions');
@@ -40,6 +44,7 @@ router.post('/Q', function(req, res){
 		cal.ans.push(req.body.ans);
 		cal.timerecord.push(d.getTime());
 		cal.pulse.push(parseInt(data));
+		console.log(cal.timerecord);
 	});
 
 	res.end();
@@ -48,9 +53,7 @@ router.post('/Q', function(req, res){
 router.get('/loading', function(req,res){
 	res.render('loading');
 });
-
 router.get('/uploadtoimgur', function(req, res){		//call by pressing the button in question.jade
-	console.log('timerecord',cal.timerecord);
 	var level = cal.cal(cal.qs,cal.ans,cal.timerecord,cal.pulse);	//depends on %
 	level = 1;//OAOAOAOAOOAOAOAOOAOAOAOAOOA
 
@@ -79,6 +82,25 @@ router.get('/uploadtoimgur', function(req, res){		//call by pressing the button 
 				});
 		}); 
 	})
+	var centerX = 100;
+	var centerY = 100;
+	var shoulderW = 400;
+	//processing the image
+	exec('./processImg/commands.sh', [level, centerX, centerY, shoulderW], function(err, data){	
+		console.log(err);
+		console.log(data.toString());                       
+		var albumId = 'fGZi1';
+		imgur.uploadFile('public/img/composite.png', albumId)	//upload to imgur
+		    .then(function (json) {
+		    	var photourl = json.data.link
+		    	console.log(photourl);
+				res.end();
+		    })
+		    .catch(function (err) {
+		        console.error(err.message);
+		    });
+	}); 
+>>>>>>> 206fad419e1d2c31ff8a1cfa4baea5bac3215743
 });															// return to sharephoto.js
 
 router.get('/share', function(req, res){			//call by pressing the button in questions.jade
@@ -94,11 +116,8 @@ router.get('/makeqrcode', function(req,res){		//call by pressing the button in s
 
 router.post('/uploadtofb', function(req, res){		//call by sharephoto.js
 
-	var token = req.body.token;
-	var name = req.body.name;
+	var ACCESS_TOKEN = req.body.token;
 	var message = req.body.message;
-	
-	var ACCESS_TOKEN =token;
 
 	var form = new FormData(); //Create multipart form
 	form.append('file', fs.createReadStream('public/img/composite.png')); //Put file
@@ -108,7 +127,7 @@ router.post('/uploadtofb', function(req, res){		//call by sharephoto.js
 	    method: 'post',
 	    host: 'graph.facebook.com',
 	    path: '/me/photos?access_token='+ACCESS_TOKEN,
-	    headers: form.getHeaders(),
+	    headers: form.getHeaders()
 	}
 	 
 	var request = https.request(options, function (res){

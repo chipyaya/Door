@@ -57,15 +57,23 @@ h1.question{
 	padding:5% 10% 0 10%;
 }
 
+.qbg5 .ques{
+	width:80%;
+}
+
+.qbg5 a.button{
+	display: inline-block;
+}
+
 .qbg6 .ques{
 	padding: 5% 10% 0 40%;
 }
 .qbg7 .ques{
-	padding: 5% 10% 0 30%;
+	padding: 0 10% 0 35%;
 }
 .qbg8 .ques{
 	width:70%;
-	padding: 10% 10% 0 10%;
+	padding: 2% 10% 0 10%;
 }
 
 .qbg1 h1, .qbg2 h1, .qbg3 h1, .qbg4 h1, .qbg5 h1, .qbg7 h1, .qbg16 h1, .qbg17 h1, .qbg18 h1, .qbg19 h1, .qbg20 h1, .qbg21 h1, .qbg22 h1, .qbg23 h1{
@@ -93,7 +101,7 @@ a.button{
 	font-size: 20px;
 	margin: 30px 5px;
 	padding: 15px 20px;
-	width:210px;
+	width:250px;
 	cursor: pointer;
 	text-align:center;
 }

@@ -2,6 +2,9 @@ extends layout
 
 block content
 	script.
+		$(window).on('touchmove', function(e){
+		    e.preventDefault();
+		});
 		var recordans = function(qnum,next,ans){
 			console.log(qnum,next,ans);
 			if(qnum != 23) {
@@ -9,6 +12,7 @@ block content
 				tlt();
 			}
 			$.post('/Q', {qnum:qnum, ans:ans},function(data){
+				$('.qbg'+qnum+' a.button').attr("onclick","");
 				if(qnum == 23) {
 					window.location='/loading';
 				}

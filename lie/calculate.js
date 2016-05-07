@@ -1,7 +1,7 @@
 var qs = [];
 var ans = [];
 var timerecord = [];
-var pulse = [];
+var pulserecord = [];
 
 var scoretable = {
 	2:[10,1,10],
@@ -22,13 +22,28 @@ var scoretable = {
 	23:[10,1,10]
 }
 
-function liepanelty(qs,ans,pulse){
+function liepanelty(qs,ans,timespend,pulse){
+	var panel = 0;
+	for(var i = 0; i < timespend.length; i++){
+		var pulse_per_msec = pulse[i]/timespend[i];
+		if(pulse_per_msec >= 80/6000)
+			panel += scoretable[qs[i]][ans[i]];
+	}
+	console.log('panel',panel);
+	return panel;
+}
 
+function calpulse(pulserecord){
+	var pulse = [];
+
+	for(var i = 0; i < pulserecord.length-1; i++)
+		pulse[i] = pulserecord[i+1] - pulserecord[i];
+	
+	return pulse;
 }
 
 function caltimespend(timerecord){
 
-	console.log('timerecord',timerecord);
 	var time = [];
 
 	for(var i = 0; i < timerecord.length-1; i++)
@@ -37,9 +52,7 @@ function caltimespend(timerecord){
 	return time;
 }
 
-function caltmean(qs,timerecord){
-
-	var timespend = caltimespend(timerecord);
+function caltmean(qs,timespend){
 	
 	var tmean = 0;
 	var record = 0;
@@ -57,9 +70,11 @@ function caltmean(qs,timerecord){
 	return tmean;
 }
 
-var cal = function(qs,ans,timerecord,pulse){
+var cal = function(qs,ans,timerecord,pulserecord){
 	
-	var tmean = caltmean(qs,timerecord);
+	var timespend = caltimespend(timerecord);
+	var pulse = calpulse(pulserecord);
+	var tmean = caltmean(qs,timespend);
 	
 	var totalscore = 0;
 	
@@ -76,11 +91,13 @@ var cal = function(qs,ans,timerecord,pulse){
 		}
 	}
 
+	totalscore -= liepanelty(qs,ans,timespend,pulse);
+
 	return parseInt(totalscore);
 }
 
 module.exports.qs = qs;
 module.exports.ans = ans;
 module.exports.timerecord = timerecord;
-module.exports.pulse = pulse;
+module.exports.pulserecord = pulserecord;
 module.exports.cal = cal;

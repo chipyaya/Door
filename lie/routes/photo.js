@@ -55,13 +55,18 @@ router.post('/Q', function(req, res){
 	res.end();
 })
 
+router.get('/gotoshoot', function(req,res){
+	res.render('gotoshoot');
+});
+
 router.get('/loading', function(req,res){
 	res.render('loading');
 });
+
 router.get('/uploadtoimgur', function(req, res){		//call by pressing the button in question.jade
 	var level = cal.cal(cal.qs,cal.ans,cal.timerecord,cal.pulserecord);	//depends on %	//depends on %
 	//readFile
-	fs.readFile('./kinect_code/coordinate.txt', 'utf8', function(err,data){
+	fs.readFile('kinect_code/coordinate.txt', 'utf8', function(err,data){
 		var strarr = data.split("\n");
 		console.log(strarr);
 		var filename = parseInt(strarr[0]);
@@ -70,7 +75,7 @@ router.get('/uploadtoimgur', function(req, res){		//call by pressing the button 
 		var shoulderW = parseFloat(strarr[4]) - parseFloat(strarr[3]);
 
 		//processing the image
-		exec('./processImg/commands.sh', [level, filename, centerX, centerY, shoulderW], function(err, data){	
+		exec('processImg/commands.sh', [level, filename, centerX, centerY, shoulderW], function(err, data){	
 			console.log(err);
 			console.log(data.toString());                       
 			var albumId = 'fGZi1';
@@ -122,20 +127,5 @@ router.post('/uploadtofb', function(req, res){		//call by sharephoto.js
 	res.end();
 })
 
-
-router.post('/ratio', function(req, res){
-	fs.readFile('ratio.txt', 'utf8', function(err,data){
-		var win_ratio = parseInt(data);
-		res.json({ ratio: win_ratio});
-	})
-})
-
-router.post('/openosk', function(req, res){
-	exec_command("osk", function(error, stdout, stderr) {});
-});
-
-router.get('/tv', function(req, res){
-	res.render('tv');
-})
 
 module.exports = router;

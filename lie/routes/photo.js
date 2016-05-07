@@ -100,7 +100,6 @@ router.get('/uploadtoimgur', function(req, res){		//call by pressing the button 
 		        console.error(err.message);
 		    });
 	}); 
->>>>>>> 206fad419e1d2c31ff8a1cfa4baea5bac3215743
 });															// return to sharephoto.js
 
 router.get('/share', function(req, res){			//call by pressing the button in questions.jade

@@ -4,22 +4,22 @@ var timerecord = [];
 var pulserecord = [];
 
 var scoretable = {
-	2:[10,1,10],
-	4:[10,10,10,10],
-	5:[10,10,10,10,10,10],
-	6:[10,1,10],
-	7:[10,1,10],
-	8:[10,1,10],
-	9:[10,1,10],
-	10:[10,1,10],
-	11:[10,1,10],
-	12:[10,1,10],
-	14:[1,10,10],
-	16:[10,1,10],
-	20:[10,1,10],
-	21:[10,1,10],
-	22:[10,1,10],
-	23:[10,1,10]
+	2:[10,1,0],
+	4:[10,10,10,0],
+	5:[10,10,10,10,10,0],
+	6:[10,1,0],
+	7:[10,1,0],
+	8:[10,1,0],
+	9:[10,1,0],
+	10:[10,1,0],
+	11:[10,1,0],
+	12:[10,1,0],
+	14:[1,10,0],
+	16:[10,1,0],
+	20:[10,1,0],
+	21:[10,1,0],
+	22:[10,1,0],
+	23:[1,10,0]
 }
 
 function liepanelty(qs,ans,timespend,pulse){
@@ -77,6 +77,8 @@ var cal = function(qs,ans,timerecord,pulserecord){
 	var tmean = caltmean(qs,timespend);
 	
 	var totalscore = 0;
+
+	var record_0 = 0;
 	
 	for(var i = 0; i < qs.length; i++){
 		
@@ -85,16 +87,27 @@ var cal = function(qs,ans,timerecord,pulserecord){
 		
 		if(q in scoretable){
 			var score = scoretable[q][a];
+			if(score == 0)
+				record_0++;
 			var adjust_score = score*(tmean/(score+tmean));
 			totalscore += adjust_score;
-			console.log('q',q,'a',a,'score',score,'tmean',tmean,'totalscore',totalscore);
 		}
 	}
 
-	totalscore -= liepanelty(qs,ans,timespend,pulse);
 	if(totalscore > 100)
 		totalscore = 100;
+	
+	else if(totalscore == 0)
+		totalscore = 50;
+	
+	else{
+		totalscore = totalscore / (ans.length - record_0) * ans.length
+		totalscore -= liepanelty(qs,ans,timespend,pulse);
+	}
+
 	var level = 5 - parseInt(totalscore/20);
+
+	console.log('totalscore',totalscore);
 
 	return level;
 }

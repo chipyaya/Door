@@ -42,10 +42,10 @@ void loop(){
   while(analogRead(TCRT5000)<100);
   
   //start scanning
-  digitalWrite(LASER,HIGH);
   TCCR1B=0;                       //pause Timer1
   ocr1a_step=STEP_INC;            //start scanning
   TCCR1B=_BV(CS11);               //resume Timer1
+  digitalWrite(LASER,HIGH);
   
   //heart beat & breathing light
   value=analogRead(HB);

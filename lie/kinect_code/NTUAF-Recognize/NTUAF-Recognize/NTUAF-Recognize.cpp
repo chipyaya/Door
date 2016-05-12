@@ -43,7 +43,7 @@ void DrawLine(cv::Mat& rImg, const Joint& rJ1, const Joint& rJ2, ICoordinateMapp
 
 		float id[2] = { ptJ2.X,ptJ2.Y };
 
-		file.open("data.txt", ios::out);      //開啟檔案
+		file.open("../../coordinate.txt", ios::out);      //開啟檔案
 
 		if (!file)     //檢查檔案是否成功開啟
 
@@ -298,7 +298,7 @@ int main(int argc, char** argv)
 
 								sprintf_s(t, "%d", newTime);
 								strPicNum = t;
-								string str = "./public/img/";
+								string str = "./public/img/kinect_people/";
 								cout << "picpath : " << str << strPicNum << ".jpeg" << endl;
 								try {
 									DrawLine(mImg, aJoints[JointType_Neck], aJoints[JointType_Head], pCoordinateMapper, strPicNum);

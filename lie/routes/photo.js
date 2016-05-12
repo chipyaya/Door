@@ -43,7 +43,7 @@ router.get('/clean', function(req, res){
 	res.end();
 
 	//clean all img under kinect_people folder
-	var dirPath = './public/img/kinect_people/';
+	var dirPath = './kinect_code/NTUAF-Recognize/NTUAF-Recognize/images/';
 	var files = fs.readdirSync(dirPath); 
 	if(files.length > 0){
 		for(var i = 0; i < files.length; i++){

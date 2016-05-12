@@ -1,5 +1,6 @@
 $(document).ready(function(){
 	tlt();
+	$('.qbg1 h1').css('opacity',1);
 });
 
 var tlt = function(){

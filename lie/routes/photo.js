@@ -17,12 +17,12 @@ router.get('/', function(req, res){
 })
 
 var lastpulse;
-var photourl;
 
 fs.readFile('hardware/heartBeat/heartBeat.txt', 'utf8', function(err,data){
 	lastpulse = parseInt(data);
 });
 
+// make it start automatically if it can detect pulse
 router.get('/detectstart', function(req, res){
 	fs.readFile('hardware/heartBeat/heartBeat.txt', 'utf8', function(err,data){
 		console.log(parseInt(data),lastpulse)
@@ -33,12 +33,25 @@ router.get('/detectstart', function(req, res){
 	});
 })
 
+// clean data before begining
 router.get('/clean', function(req, res){
+	//clean calculate pulse data
 	cal.qs = [];
 	cal.ans = [];
 	cal.timerecord = [];
 	cal.pulserecord = [];
 	res.end();
+
+	//clean all img under kinect_people folder
+	var dirPath = './public/img/kinect_people/';
+	var files = fs.readdirSync(dirPath); 
+	if(files.length > 0){
+		for(var i = 0; i < files.length; i++){
+			var filePath = dirPath + '/' + files[i];
+			if(fs.statSync(filePath).isFile())
+				fs.unlinkSync(filePath);
+        }
+	}
 })
 
 router.get('/questions', function(req, res){
@@ -72,7 +85,18 @@ router.post('/Q', function(req, res){
 	res.end();
 })
 
+router.get('/detectfinish', function(req, res){
+	fs.readFile('kinect_code/finish.txt', 'utf8', function(err,data){
+		if(parseInt(data) == 1)
+			res.json({result:1});
+		else
+			res.json({result:0});
+	});
+})
+
 router.get('/gotoshoot', function(req,res){
+	// set finish.txt to 0
+	fs.writeFile('kinect_code/finish.txt', '0', 'utf8');
 	res.render('gotoshoot');
 });
 
@@ -86,20 +110,31 @@ router.get('/uploadtoimgur', function(req, res){		//call by pressing the button 
 	//readFile
 	fs.readFile('kinect_code/coordinate.txt', 'utf8', function(err,data){
 		var strarr = data.split("\n");
-		console.log(strarr);
 		var filename = parseInt(strarr[0]);
 		var centerX = parseInt(strarr[1]);
 		var centerY = parseInt(strarr[2]);
-		var shoulderW = parseFloat(strarr[4]) - parseFloat(strarr[3]);
+		console.log('level = ', level);
+		console.log(level, filename, centerX, centerY);
+		var str = [
+			level.toString(),
+			filename.toString(),
+			centerX.toString(),
+			centerY.toString(),
+		]
+		cmd = str.join(' ');
+		console.log(cmd);
 
 		//processing the image
-		exec('processImg/commands.sh', [level, filename, centerX, centerY, shoulderW], function(err, data){	
+		//exec('./processImg/commands.sh', [level, filename, centerX, centerY, shoulderW], function(err, data){	
+		exec(cmd, function(err, data){	
+		
 			console.log(err);
 			console.log(data.toString());                       
 			var albumId = 'fGZi1';
 			imgur.uploadFile('public/img/composite.png', albumId)	//upload to imgur
 				.then(function (json) {
-					photourl = json.data.link
+					var photourl = json.data.link
+					console.log(photourl);
 					res.end();
 				})
 				.catch(function (err) {
@@ -114,7 +149,7 @@ router.get('/share', function(req, res){			//call by pressing the button in ques
 });
 
 router.get('/makeqrcode', function(req,res){		//call by pressing the button in sharephoto.jade
-	var qrcode = qr.image(photourl, { type: 'svg' });	
+	var qrcode = qr.image('http://i.imgur.com/96ySytj.png', { type: 'svg' });	
 	res.type('svg');
 	qrcode.pipe(res);
 });

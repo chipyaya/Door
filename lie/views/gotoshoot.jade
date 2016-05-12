@@ -1,6 +1,17 @@
 extends layout
 
 block content
+	script.
+		function detect(){
+			console.log('detect');
+			$.get('/detectfinish',function(data){
+				console.log('data result:'+data.result);
+				if(data.result == 1)
+					window.location='/loading';
+			});
+		}
+		setInterval(detect, 1000);
+
 	style.
 		.bg{
 			background-size: cover;

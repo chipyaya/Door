@@ -8,8 +8,7 @@ var request = require('request');
 var imgur = require('imgur');
 var qr = require('qr-image');
 var FormData = require('form-data');
-var exec = require('child_process').execFile;
-var exec_command = require('child_process').exec;
+var exec_cmd = require('child_process').exec;
 var cal = require('../calculate.js');
 
 router.get('/', function(req, res){
@@ -109,6 +108,7 @@ router.get('/uploadtoimgur', function(req, res){		//call by pressing the button 
 	var level = cal.cal(cal.qs,cal.ans,cal.timerecord,cal.pulserecord);	//depends on %	//depends on %
 	//readFile
 	fs.readFile('kinect_code/coordinate.txt', 'utf8', function(err,data){
+		var sh = './processImg/commands.sh';
 		var strarr = data.split("\n");
 		var filename = parseInt(strarr[0]);
 		var centerX = parseInt(strarr[1]);
@@ -116,6 +116,7 @@ router.get('/uploadtoimgur', function(req, res){		//call by pressing the button 
 		console.log('level = ', level);
 		console.log(level, filename, centerX, centerY);
 		var str = [
+			sh,
 			level.toString(),
 			filename.toString(),
 			centerX.toString(),
@@ -125,8 +126,7 @@ router.get('/uploadtoimgur', function(req, res){		//call by pressing the button 
 		console.log(cmd);
 
 		//processing the image
-		//exec('./processImg/commands.sh', [level, filename, centerX, centerY, shoulderW], function(err, data){	
-		exec(cmd, function(err, data){	
+		exec_cmd(cmd, function(err, data){	
 		
 			console.log(err);
 			console.log(data.toString());                       

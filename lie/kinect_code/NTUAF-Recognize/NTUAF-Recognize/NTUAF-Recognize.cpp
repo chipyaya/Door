@@ -306,6 +306,18 @@ int main(int argc, char** argv)
 									//DrawLine(mImg, aJoints[JointType_SpineShoulder], aJoints[JointType_ShoulderRight], pCoordinateMapper, strPicNum);
 
 									cv::imwrite(str + strPicNum + ".jpeg", mat, compression_params);
+									fstream newfile;
+									newfile.open("../../finished.txt", ios::out);      //開啟檔案
+
+									if (!newfile)     //檢查檔案是否成功開啟
+									{
+										cerr << "Can't open file!\n";
+										exit(1);     //在不正常情形下，中斷程式的執行
+
+									}
+									newfile << "1" << "\n";
+								}
+
 								}
 								catch (cv::Exception& ex) {
 									fprintf(stderr, "Exception converting image to JPG format: %s\n", ex.what());

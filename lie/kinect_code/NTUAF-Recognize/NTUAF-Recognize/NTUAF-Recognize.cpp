@@ -298,7 +298,7 @@ int main(int argc, char** argv)
 
 								sprintf_s(t, "%d", newTime);
 								strPicNum = t;
-								string str = "./public/img/kinect_people/";
+								string str = "./images/";
 								cout << "picpath : " << str << strPicNum << ".jpeg" << endl;
 								try {
 									DrawLine(mImg, aJoints[JointType_Neck], aJoints[JointType_Head], pCoordinateMapper, strPicNum);
@@ -307,7 +307,7 @@ int main(int argc, char** argv)
 
 									cv::imwrite(str + strPicNum + ".jpeg", mat, compression_params);
 									fstream newfile;
-									newfile.open("../../finished.txt", ios::out);      //開啟檔案
+									newfile.open("../../finish.txt", ios::out);      //開啟檔案
 
 									if (!newfile)     //檢查檔案是否成功開啟
 									{

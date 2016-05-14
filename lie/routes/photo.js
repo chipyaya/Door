@@ -110,15 +110,21 @@ router.get('/uploadtoimgur', function(req, res){		//call by pressing the button 
 	//readFile
 	fs.readFile('./kinect_code/coordinate.txt', 'utf8', function(err,data){
 		//var level
-		var strarr = data.split("\n");
+		var strarr = data.split("\r\n");
 		var filename_str = strarr[0];
+
 		var centerX = strarr[1];
 		var centerY = strarr[2];
 		var anotherX = (parseInt(strarr[1]) - 450).toString();
-		var path = './kinect_code/NTUAF-Recognize/NTUAF-Recognize/images/';
+		var path = 'kinect_code/NTUAF-Recognize/NTUAF-Recognize/images/';
+		var jpeg_path= path+filename_str+".jpeg";
+		var png_path= path+filename_str+".png";
+		console.log(jpeg_path);
+		console.log(png_path);
 
-		im.convert([path+filename_str+'.jpeg', path+filename_str+'.png'], function(err, stdout){
+		im.convert([jpeg_path, png_path], function(err, stdout){
 			if (err) throw err;
+			console.log('to png success');
 			var ori = path+filename_str+'.png';
 			var cir = 'circle '+centerX+','+centerY+' '+anotherX+','+centerY;
 

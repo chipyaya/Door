@@ -1,23 +1,28 @@
 #!/bin/bash
-# $1 = 1 (0~20%), 2(20%~40%), ...
-# level, centerX, centerY, shoulderW, leftShoulderX, leftShoulderY
+level=$1
+filename=$2
+centerX=$3
+centerY=$4
+anotherX=$((${centerX}-200))
 
-if [ "$1" == "1" ]; then
-	cropX=${2}-${4};
-	cropY=${3}-100;		
-	x=${4};y=1000;
-fi
+path='./kinect_code/NTUAF-Recognize/NTUAF-Recognize/images/'
+# windows
+# convert_cmd='C:/Windows/System32/ImageMagick-7.0.1-1-portable-Q16-x64/convert.exe'
+# linux
+convert_cmd='convert'
+
+# convert to png
+${convert_cmd} ${path}${filename}.jpeg ${path}${filename}.png
 
 # remove bg
 # convert ./public/img/raw.jpg -fuzz 15% -transparent "rgb(255,255,255)" ./public/img/person.png
 
-# mask yellow
-# convert ./public/img/raw.png -fill "rgb(251, 188)" -colorize 20%  ./public/img/person.png
-
 # crop the circle
-# convert ./public/img/person.png \( +clone -threshold -1 -negate -fill white -draw "circle ${centerX},${centerY} ${centerX}-444,${centerY} " \) -alpha off -compose copy_opacity -composite ./public/img/person.png
-convert ./public/img/raw.png \( +clone -threshold -1 -negate -fill white -draw "circle 552,560 996,560" \) -alpha off -compose copy_opacity -composite ./public/img/person.png
-	
+${convert_cmd} ${path}${filename}.png \( +clone -threshold -1 -negate -fill white -draw "circle ${centerX},${centerY} ${anotherX},${centerY} " \) -alpha off -compose copy_opacity -composite ${path}person.png
+
+# convert -resize 150%x150%  ${path}person.png ${path}person.png
+
 # composite 
-convert ./public/img/test.png ./public/img/person.png -geometry +150+-30 -composite ./public/img/composite.png
-# convert ./public/img/photo_${1}.png ./public/img/person.png -geometry +150+-30 -composite ./public/img/composite.png
+x=$((700-${centerX}))
+y=$((540-${centerY}))
+${convert_cmd} ./public/img/win_loo/win_loo_${level}.png ${path}person.png -geometry +${x}+${y} -composite ./public/img/composite.png

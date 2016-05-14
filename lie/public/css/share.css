@@ -1,16 +1,24 @@
 #sharebg{
-	position:absolute;
-	height:100vh;
-	z-index: 0;
+	left:0;
+	z-index:1;
+	height: 88vh;
 
 }
 
 #composite{
 	position:absolute;
-	top:8.8%;
-	left: 4%;
-	height:82vh;
-	z-index: 1;
+	height:72.6%;
+	top:7.5%;
+	left:4.25%;
+	z-index:90;
+}
+
+.sharebtns{
+	position:absolute;
+	top:10%;
+	right:2%;
+	z-index:2;
+	margin: auto;
 
 }
 
@@ -22,46 +30,79 @@
 	z-index: 2;
 }
 
-.button{
-	display: inline-block;
+a:link{
+	outline:none;
+}
+
+a.button{
+	display: block;
 	border: 2px solid white;
 	border-radius: 20px;
 	font-family: Consolas, monaco, monospace;
 	color: white;
 	text-decoration: none;
-	font-size: 25px;
+	font-size: 20px;
 	margin: 30px 5px;
 	padding: 15px 20px;
+	width:210px;
 	cursor: pointer;
+	text-align:center;
+}
+#fbmessage a{
+	display: block;
+	border: 2px solid white;
+	border-radius: 20px;
+	font-family: Consolas, monaco, monospace;
+	color: white;
+	text-decoration: none;
+	font-size: 15px;
+	margin: 10px auto;
+	padding: 10px 5px;
+	width:80px;
+	cursor: pointer;
+	text-align:center;
 }
 
-.button:hover{
-	color: black;
-	background: white;
-
+a.end{
+	position:fixed;
+	width:210px;
+	bottom:110px;
 }
 
-#success_notice_qrcode, #success_notice_fb{
+#success_notice_qrcode{
+	color: white;
 	display:none;
-	position:absolute;
 }
-#success_notice_qrcode span, #success_notice_fb span{
-	font-size:25px;
-	display: inline-block;
-}
-
 
 #fbmessage{
+	border:2px solid white;
 	position:absolute;
+	margin: 0 auto;
+	top:10%;
+	left: 0;
+	right: 0;
 	z-index:99;
-	height:200px;
-	width:300px;
+	height:250px;
+	width:350px;
+	background:black;
 	display:none;
 }
 
-#fbmessage input{
+#fbmessage textarea{
 	height:50%;
-	width:100%;
+	width:80%;
+	margin: 10% 0 3% 10%;
+	
 }
 
+#whitebg{
+	width: 80%;
+	background-color: white;
+	margin: 20px auto;
+	display:none;
+}
 
+.qrcode{
+	width: 80%;
+	padding:10px;
+}

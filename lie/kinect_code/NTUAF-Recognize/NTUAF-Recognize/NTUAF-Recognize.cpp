@@ -52,7 +52,7 @@ void DrawLine(cv::Mat& rImg, const Joint& rJ1, const Joint& rJ2, ICoordinateMapp
 			exit(1);     //在不正常情形下，中斷程式的執行
 
 		}
-		file << nowTime << ".jpeg" << "\n";
+		file << nowTime << "\n";
 		for (int i = 0; i < 2; i++) {
 			//file << str[i] << ":" << id[i] << "\n";
 			file << id[i] << "\n";

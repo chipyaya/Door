@@ -8,7 +8,7 @@ var request = require('request');
 var imgur = require('imgur');
 var qr = require('qr-image');
 var FormData = require('form-data');
-//var exec_cmd = require('child_process').exec;
+var exec_cmd = require('child_process').exec;
 var cal = require('../calculate.js');
 var im = require('imagemagick');
 
@@ -26,10 +26,10 @@ fs.readFile('hardware/heartBeat/heartBeat.txt', 'utf8', function(err,data){
 router.get('/detectstart', function(req, res){
 	fs.readFile('hardware/heartBeat/heartBeat.txt', 'utf8', function(err,data){
 		console.log(parseInt(data),lastpulse)
-		if(parseInt(data) > lastpulse)
-			res.json({result:1});
-		else
-			res.json({result:0});
+			if(parseInt(data) > lastpulse)
+				res.json({result:1});
+			else
+				res.json({result:0});
 	});
 })
 
@@ -50,7 +50,7 @@ router.get('/clean', function(req, res){
 			var filePath = dirPath + '/' + files[i];
 			if(fs.statSync(filePath).isFile())
 				fs.unlinkSync(filePath);
-        }
+		}
 	}
 })
 
@@ -107,58 +107,82 @@ router.get('/loading', function(req,res){
 router.get('/uploadtoimgur', function(req, res){		//call by pressing the button in question.jade
 	lastpulse = cal.pulserecord[cal.pulserecord.length-1];
 	var level = cal.cal(cal.qs,cal.ans,cal.timerecord,cal.pulserecord);	//depends on %	//depends on %
-	//readFile
-	fs.readFile('./kinect_code/coordinate.txt', 'utf8', function(err,data){
-		//var level
+	fs.readFile('kinect_code/coordinate.txt', 'utf8', function(err,data){
+		var sh = 'test.bat';
+		var level = cal.cal(cal.qs,cal.ans,cal.timerecord,cal.pulserecord);	//depends on %	//depends on %
 		var strarr = data.split("\r\n");
-		var filename_str = strarr[0];
+		var filename = parseInt(strarr[0]);
+		var centerX = parseInt(strarr[1]);
+		var centerY = parseInt(strarr[2]);
+		var str = [
+			sh,
+			level.toString(),
+			filename.toString(),
+			centerX.toString(),
+			centerY.toString(),
+		]
+		cmd = str.join(' ');
+		//console.log(cmd);
 
-		var centerX = strarr[1];
-		var centerY = strarr[2];
-		var anotherX = (parseInt(strarr[1]) - 450).toString();
-		var path = 'kinect_code/NTUAF-Recognize/NTUAF-Recognize/images/';
-		var jpeg_path= path+filename_str+".jpeg";
-		var png_path= path+filename_str+".png";
-		console.log(jpeg_path);
-		console.log(png_path);
+		console.log('before exec');
+		//processing the image
+ 
+		exec_cmd(cmd, function(err, data){	
 
-		im.convert([jpeg_path, png_path], function(err, stdout){
-			if (err) throw err;
-			console.log('to png success');
-			var ori = path+filename_str+'.png';
-			var cir = 'circle '+centerX+','+centerY+' '+anotherX+','+centerY;
-
-			im.convert(['-size', '1290x1080', 'xc:none', '-fill', ori, '-draw', cir, path+'person.png'], function(err, stdout){
-				if (err) throw err;
-				console.log('crop success');
-				var bg_path = './public/img/win_loo/win_loo_'+level.toString()+'.png';
-				var x = 700-parseInt(centerX);
-				var y = 540-parseInt(centerY)-10;
-				var com_path = './public/img/';
-
-				im.convert([bg_path, path+'person.png', '-geometry', '+'+x+'+'+y, '-composite', com_path+'composite.png'], function(err, stdout){
-					if (err) throw err;
-					console.log('composite success');
-
-					//upload to imgur
-					var albumId = 'fGZi1';
-					imgur.uploadFile('public/img/composite.png', albumId)	
-						.then(function (json) {
-							var photourl = json.data.link
-							console.log(photourl);
-							res.end();
-						})
-						.catch(function (err) {
-							console.error(err.message);
-						});
-				});
-
-			});
-
+		console.log(err);
+		console.log(data.toString());                       
+		console.log('after exec');
+		var albumId = 'fGZi1';
+		imgur.uploadFile('public/img/composite.png', albumId)	//upload to imgur
+			.then(function (json) {
+				var photourl = json.data.link
+					console.log(photourl);
+				res.end();
+			})
+		.catch(function (err) {
+			console.error(err.message);
 		});
-
 	});
+	});
+	res.end();
 });															// return to sharephoto.js
+
+router.get('/test', function(req, res){
+	fs.readFile('kinect_code/coordinate.txt', 'utf8', function(err,data){
+		var sh = './processImg/commands.sh';
+		var level = cal.cal(cal.qs,cal.ans,cal.timerecord,cal.pulserecord);	//depends on %	//depends on %
+		var strarr = data.split("\r\n");
+		var filename = parseInt(strarr[0]);
+		var centerX = parseInt(strarr[1]);
+		var centerY = parseInt(strarr[2]);
+		var str = [
+			sh,
+			level.toString(),
+			filename.toString(),
+			centerX.toString(),
+			centerY.toString(),
+		]
+			cmd = str.join(' ');
+		console.log(cmd);
+
+		//processing the image
+		exec_cmd(cmd, function(err, data){	
+
+			console.log(err);
+			console.log(data.toString());                       
+			var albumId = 'fGZi1';
+			imgur.uploadFile('public/img/composite.png', albumId)	//upload to imgur
+				.then(function (json) {
+					var photourl = json.data.link;
+					console.log(photourl);
+					res.end();
+				})
+			.catch(function (err) {
+				console.error(err.message);
+			});
+		});
+	});
+});
 
 router.get('/share', function(req, res){			//call by pressing the button in questions.jade
 	res.render('sharephoto');
@@ -166,7 +190,7 @@ router.get('/share', function(req, res){			//call by pressing the button in ques
 
 router.get('/makeqrcode', function(req,res){		//call by pressing the button in sharephoto.jade
 	var qrcode = qr.image('http://i.imgur.com/96ySytj.png', { type: 'svg' });	
-	res.type('svg');
+		res.type('svg');
 	qrcode.pipe(res);
 });
 
@@ -181,51 +205,18 @@ router.post('/uploadtofb', function(req, res){		//call by sharephoto.js
 	form.append('message', message); //Put message
 
 	var options = {
-	    method: 'post',
-	    host: 'graph.facebook.com',
-	    path: '/me/photos?access_token='+ACCESS_TOKEN,
-	    headers: form.getHeaders()
+		method: 'post',
+		host: 'graph.facebook.com',
+		path: '/me/photos?access_token='+ACCESS_TOKEN,
+		headers: form.getHeaders()
 	}
-	 
+
 	var request = https.request(options, function (res){
-	     console.log(res);
+		console.log(res);
 	});
-	 
+
 	form.pipe(request);
 	res.end();
 })
-
-router.get('/magick', function(req, res){
-
-	fs.readFile('./kinect_code/coordinate.txt', 'utf8', function(err,data){
-		//var level
-		var strarr = data.split("\n");
-		var filename_str = strarr[0];
-		var centerX = strarr[1];
-		var centerY = strarr[2];
-		var anotherX = (parseInt(strarr[1]) - 450).toString();
-		var path = './kinect_code/NTUAF-Recognize/NTUAF-Recognize/images/';
-
-		im.convert([path+filename_str+'.jpeg', path+filename_str+'.png'], function(err, stdout){
-			if (err) throw err;
-		var ori = path+filename_str+'.png';
-			var cir = 'circle '+centerX+','+centerY+' '+anotherX+','+centerY;
-			im.convert(['-size', '1290x1080', 'xc:none', '-fill', ori, '-draw', cir, path+'person.png'], function(err, stdout){
-				if (err) throw err;
-				console.log('success1');
-				var bg_path = './public/img/win_loo/win_loo_1.png';
-				var x = 700-parseInt(centerX);
-				var y = 540-parseInt(centerY)-10;
-				var com_path = './public/img/';
-				im.convert([bg_path, path+'person.png', '-geometry', '+'+x+'+'+y, '-composite', com_path+'composite.png'], function(err, stdout){
-					if (err) throw err;
-					console.log('success2');
-				});
-			});
-		});
-
-	});
-
-});
 
 module.exports = router;

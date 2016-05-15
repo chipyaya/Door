@@ -1,9 +1,9 @@
-﻿  stdafx.cpp
-  NTUAF-Recognize.cpp
-c:\opencv\build\include\opencv2\core\mat.hpp(1965): warning C4819: 檔案含有無法在目前字碼頁 (950) 中表示的字元。請以 Unicode 格式儲存檔案以防止資料遺失
-c:\opencv\build\include\opencv2\core\persistence.hpp : warning C4819: 檔案含有無法在目前字碼頁 (950) 中表示的字元。請以 Unicode 格式儲存檔案以防止資料遺失
-c:\opencv\build\include\opencv2\core\utility.hpp : warning C4819: 檔案含有無法在目前字碼頁 (950) 中表示的字元。請以 Unicode 格式儲存檔案以防止資料遺失
-c:\opencv\build\include\opencv2\core\utility.hpp : warning C4819: 檔案含有無法在目前字碼頁 (950) 中表示的字元。請以 Unicode 格式儲存檔案以防止資料遺失
-e:\github\kinect\ntuaf-recognize\ntuaf-recognize\ntuaf-recognize.cpp(113): warning C4244: '引數': 將 'float' 轉換為 'int'，由於類型不同，可能導致資料遺失
-e:\github\kinect\ntuaf-recognize\ntuaf-recognize\ntuaf-recognize.cpp(328): warning C4244: '=': 將 'time_t' 轉換為 'int'，由於類型不同，可能導致資料遺失
-  NTUAF-Recognize.vcxproj -> E:\Github\Kinect\NTUAF-Recognize\x64\Debug\NTUAF-Recognize.exe
+﻿已經開始建置於 2016/5/15 下午 10:01:23。
+     1>節點 2 (Build 目標) 上的專案 "C:\Users\NTUAF-R2D2\Desktop\Door\lie\kinect_code\NTUAF-Recognize\NTUAF-Recognize\NTUAF-Recognize.vcxproj"。
+     1>Link:
+         NTUAF-Recognize.vcxproj -> C:\Users\NTUAF-R2D2\Desktop\Door\lie\kinect_code\NTUAF-Recognize\x64\Debug\NTUAF-Recognize.exe
+     1>專案 "C:\Users\NTUAF-R2D2\Desktop\Door\lie\kinect_code\NTUAF-Recognize\NTUAF-Recognize\NTUAF-Recognize.vcxproj" (Build 目標) 建置完成。
+
+建置成功。
+
+經過時間 00:00:00.04

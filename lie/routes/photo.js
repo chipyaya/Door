@@ -123,7 +123,7 @@ router.get('/uploadtoimgur', function(req, res){		//call by pressing the button 
 			centerY.toString(),
 		]
 		cmd = str.join(' ');
-		//console.log(cmd);
+		console.log(cmd);
 
 		console.log('before exec');
 		//processing the image

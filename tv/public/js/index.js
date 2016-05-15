@@ -1,11 +1,14 @@
-(function(){
-  'use strict';
-
-  $('.winner .number').animateNumber({number: 20}, 1500);
-  $('.loser .number').animateNumber({number: 80}, 1500);
-
-})();
-
+function detect(){
+	$.get('/winloo',function(data){
+		var win = parseInt(data.result);
+		var loo = 100 - win;
+		console.log(win, loo);
+		'use strict';
+		$('.winner .number').animateNumber({number: win}, 1500);
+		$('.loser .number').animateNumber({number: loo}, 1500);
+	});
+}
+setInterval(detect, 10000);
 
 function toggle(effect){
   var effect = (typeof effect != 'undefined') ? effect : 'hide-sth';

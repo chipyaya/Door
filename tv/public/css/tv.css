@@ -91,30 +91,33 @@ section:nth-of-type(2){
   position: absolute;
   color: #fff;
   top: 70%;
-  width: 16vw;
+  width: 18vw;
   line-height: 5vh;
-  text-align: center;
 }
 
 .winner .num-box {
   color: var(--b);
-  right: 0;
+  right: 4vw;
+  text-align: right;
 }
 
 .loser .num-box {
   color: var(--y);
   left: 0;
+  text-align: left;
 }
 
 .num-box .number {
-  width: 10vw;
-  font-size: 8vw;
+  width: 100%;
+  padding: 0 10px;
+  font-size: 7vw;
   display: inline-block;
 }
 
-.num-box .percent {
-  font-size: 3vw;
-  display: inline-block;
+.number:after {
+	content: '%';
+	position: absolute;
+	font-size: 4vw;		
 }
 
 .door-text {

@@ -102,6 +102,7 @@ router.get('/gotoshoot', function(req,res){
 
 router.get('/loading', function(req,res){
 	res.render('loading');
+	
 });
 
 router.get('/uploadtoimgur', function(req, res){		//call by pressing the button in question.jade
@@ -135,54 +136,18 @@ router.get('/uploadtoimgur', function(req, res){		//call by pressing the button 
 		var albumId = 'fGZi1';
 		imgur.uploadFile('public/img/composite.png', albumId)	//upload to imgur
 			.then(function (json) {
-				var photourl = json.data.link
-					console.log(photourl);
-				res.end();
+				var photourl = json.data.link;
+				console.log(photourl);
+				//res.redirect('/share');
+				res.json(json);
 			})
-		.catch(function (err) {
-			console.error(err.message);
-		});
-	});
-	});
-	res.end();
-});															// return to sharephoto.js
-
-router.get('/test', function(req, res){
-	fs.readFile('kinect_code/coordinate.txt', 'utf8', function(err,data){
-		var sh = './processImg/commands.sh';
-		var level = cal.cal(cal.qs,cal.ans,cal.timerecord,cal.pulserecord);	//depends on %	//depends on %
-		var strarr = data.split("\r\n");
-		var filename = parseInt(strarr[0]);
-		var centerX = parseInt(strarr[1]);
-		var centerY = parseInt(strarr[2]);
-		var str = [
-			sh,
-			level.toString(),
-			filename.toString(),
-			centerX.toString(),
-			centerY.toString(),
-		]
-			cmd = str.join(' ');
-		console.log(cmd);
-
-		//processing the image
-		exec_cmd(cmd, function(err, data){	
-
-			console.log(err);
-			console.log(data.toString());                       
-			var albumId = 'fGZi1';
-			imgur.uploadFile('public/img/composite.png', albumId)	//upload to imgur
-				.then(function (json) {
-					var photourl = json.data.link;
-					console.log(photourl);
-					res.end();
-				})
 			.catch(function (err) {
 				console.error(err.message);
 			});
+
 		});
 	});
-});
+});															// return to sharephoto.js
 
 router.get('/share', function(req, res){			//call by pressing the button in questions.jade
 	res.render('sharephoto');

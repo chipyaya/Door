@@ -11,6 +11,10 @@ var FormData = require('form-data');
 var exec_cmd = require('child_process').exec;
 var cal = require('../calculate.js');
 var im = require('imagemagick');
+var firebase = require('firebase');
+
+var fbase = new firebase('https://ntuaf-door.firebaseio.com/ratio5');
+fbase.authWithCustomToken('FdVNtgTiJwhnXYELrxW2auWwGRWopXCjWrPej7Gb');
 
 router.get('/', function(req, res){
 	res.render('index');
@@ -111,6 +115,19 @@ router.get('/uploadtoimgur', function(req, res){		//call by pressing the button 
 	fs.readFile('kinect_code/coordinate.txt', 'utf8', function(err,data){
 		var sh = 'test.bat';
 		var level = cal.cal(cal.qs,cal.ans,cal.timerecord,cal.pulserecord);	//depends on %	//depends on %
+	
+		fbase.once("value", function(obj) {
+			console.log('key','l'+String(level), 'val', obj.val()['l'+String(level)])
+			var newobj = {};
+			var key = 'l'+String(level);		
+			newobj[key] = obj.val()['l'+String(level)]+1;
+			fbase.update(newobj);
+
+
+			
+		}, function (errorObject) {
+  			console.log("The read failed: " + errorObject.code);
+		});	
 		var strarr = data.split("\r\n");
 		var filename = parseInt(strarr[0]);
 		var centerX = parseInt(strarr[1]);

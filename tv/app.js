@@ -2,10 +2,12 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var fs = require('fs');
-//var firebase = require('firebase');
+var firebase = require('firebase');
 var app = express();
 
-//var fbase = new firebase('https://ntuaf-door.firebaseio.com/');
+var ref = new firebase('https://ntuaf-door.firebaseio.com/ratio5');
+ref.authWithCustomToken('FdVNtgTiJwhnXYELrxW2auWwGRWopXCjWrPej7Gb');
+
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -13,7 +15,6 @@ app.set('view engine', 'jade');
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', function(req, res){
-		console.log('hi');
 	res.render('index');
 })
 
@@ -24,6 +25,17 @@ app.get('/winloo', function(req, res){
 		res.json({result: win});
 	});
 })
+
+app.get('/ratio5', function(req, res){
+	ref.once("value", function(snapshot) {
+		  console.log(snapshot.val());
+		  res.json({result: snapshot.val()});
+	}, function (errorObject) {
+		  console.log("The read failed: " + errorObject.code);
+	});
+
+});
+
 
 app.listen(3001, function () {
 	console.log('Example app listening on port 3001!');

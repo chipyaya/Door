@@ -4,7 +4,7 @@ body{
 }
 
 .index_bg{
-	height: 100vh;
+	height: 95vh;
 	background-image: url(/img/web_bg/web_index.jpg);
 	background-size: cover;
 }

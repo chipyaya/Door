@@ -1,3 +1,12 @@
+# Usage
+
+```
+$ npm i
+$ npm start
+```
+
+go to <strong>localhost:3000/</strong> in your browser
+
 # view image on terminal
 ```
 eog bg-over.png
@@ -44,6 +53,3 @@ convert ./public/img/raw.jpg -fuzz 15% -transparent "rgb(255,255,255)" ./public/
 g++ `Magick++-config --cxxflags --cppflags` test.cpp `Magick++-config --ldflags --libs`
 ```
 
-# loo
-midx = 82+306
-midy = 550

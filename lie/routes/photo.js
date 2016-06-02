@@ -11,8 +11,8 @@ var cal = require('../calculate.js');
 var im = require('imagemagick');
 var firebase = require('firebase');
 
-var fbase = new firebase('https://ntuaf-door.firebaseio.com/ratio5');
-fbase.authWithCustomToken('FdVNtgTiJwhnXYELrxW2auWwGRWopXCjWrPej7Gb');
+var ref = new firebase('https://ntuaf-door.firebaseio.com/ratio5');
+ref.authWithCustomToken('FdVNtgTiJwhnXYELrxW2auWwGRWopXCjWrPej7Gb');
 
 router.get('/', function(req, res){
 	res.render('index');
@@ -112,7 +112,7 @@ router.get('/uploadtoimgur', function(req, res){		//call by pressing the button 
 	lastpulse = cal.pulserecord[cal.pulserecord.length-1];
 	var level = cal.cal(cal.qs,cal.ans,cal.timerecord,cal.pulserecord);	//depends on %	//depends on %
 	fs.readFile('kinect_code/coordinate.txt', 'utf8', function(err,data){
-		var sh = 'test.bat';
+		var sh = 'processImg.bat';
 		var level = cal.cal(cal.qs,cal.ans,cal.timerecord,cal.pulserecord);	//depends on %	//depends on %
 	
 		fbase.once("value", function(obj) {
@@ -171,7 +171,7 @@ router.get('/share', function(req, res){			//call by pressing the button in ques
 
 router.get('/makeqrcode', function(req,res){		//call by pressing the button in sharephoto.jade
 	var qrcode = qr.image(photourl, { type: 'svg' });	
-		res.type('svg');
+	res.type('svg');
 	qrcode.pipe(res);
 });
 

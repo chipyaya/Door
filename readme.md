@@ -1,18 +1,31 @@
-# 最Q的door :+1: :+1: :+1:
-##2月		
-1	  2016/1/31	UI設計+架網站<br>
-2	  2016/2/7	UI實作<br>
-3	  2016/2/14	數據分析+測謊演算法<br>
-4	  2016/2/28	camera影像合成<br><br>
-##3月		
-1	  2016/3/6	buffer<br>
-2	  2016/3/13	軟硬整合1<br>
-3	  2016/3/20	電視UI+架網站<br>
-4	  2016/3/27	電視UI+數據<br><br>
-##4月		
-1	  2016/4/3	軟硬整合2<br>
-2	  2016/4/10	midterm<br>
-3	  2016/4/17	midterm<br>
-4	  2016/4/24	測試<br><br>
-##5月		
-1	  2016/5/1	佈置<br><br>
+# NTUAF - Door
+
+## lie
+### software
+- kinect
+	- detect head and body
+	- countdown and snapshot
+
+- web
+	- slide down question
+	- read heartbeat data from file
+	- count win/lose score by heartbeat, answer, and time of answering
+	- write number of people for each result to firebase
+	- composite photo from kinect by an bg image according to the win/lose score (by imagemagick and bat script)
+	- upload image to imgur and create qrcode for user to download
+	- enable user to login fb and share the composite photo 
+
+### hardware
+- heartbeat detector
+- notebook, ipad, kinect
+
+## tv
+### software
+- web
+	- read the sum of people passing winner/loser door
+	- get result data from firebase
+	- display all statistic data
+
+### hardware
+- people entering door detector
+
